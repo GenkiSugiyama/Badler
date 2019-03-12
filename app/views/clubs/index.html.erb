@@ -2,9 +2,9 @@
 <%= link_to "クラブ作成", new_club_path %>
 <% @clubs.each do |club| %>
 <ul>
-  <li class="club">
+  <li class="club">クラブ名：
     <%= link_to club_path(club.id) do %>
-      クラブ名：<%= club.club_name %>
+      <%= club.club_name %>
     <% end %>
   </li>
 </ul>

@@ -18,6 +18,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @categories = @event.event_categories
   end
 
   def index
@@ -37,6 +38,11 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    event = Event.find(params[:id])
+    if event.destroy
+      flash[:notice] = "大会を削除しました"
+      redirect_to club_path(event.club_id)
+    end
   end
 
   private

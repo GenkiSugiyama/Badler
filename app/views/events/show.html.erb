@@ -1,2 +1,19 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<h2>大会情報詳細</h2>
+<h3>大会名：<%= @event.event %></h3>
+<h3>エントリー期日：<%= @event.deadline %></h3>
+<h3>開催日：<%= @event.date %></h3>
+<h3>参加費：<%= @event.entry_fee %>円</h3>
+<h3>エントリー定員数：<%= @event.total_capacity %></h3>
+<h3>開催場所：<%= @event.event_place %>人</h3>
+<h3>住所：<%= @event.place_address %></h3>
+<h3>決済方法：<%= @event.payment_method %></h3>
+<h3>大会要項：<%= @event.event_detail %></h3>
+<h2>開催種目</h2>
+<% @categories.each do |category| %>
+  <h3>種目名：<%= category.category_title %></h3>
+  <h3>種目詳細：<%= category.category_detail %></h3>
+<% end %>
+
+<%= link_to "編集する", edit_event_path(@event.id) %>
+<%= link_to "削除する", event_path(@event.id), method: :delete %>
+

@@ -14,21 +14,18 @@
 <div class="user-clubs">
   <h2>運営中・加入中のクラブ</h2>
   <% @clubs.each do |club| %>
-    <% if club.club_menbers.find_by(user_id: @user.id).status == 3 %>
+    <% if club.club_menbers.find_by(user_id: @user.id).status_before_type_cast >= 100 %>
       <div class="club-field">
         <%= link_to club_path(club.id) do %>
           <%= club.club_name %>
         <% end %>
-      </div>
-    <% else %>
-      <div class="club-field">
-        <%= link_to club_path(club.id) do %>
-          <%= club.club_name %>
-        <% end %>
-        <p><strong>管理中のクラブ</strong></p>
       </div>
     <% end %>
   <% end %>
+</div>
+
+<div class="user-entry">
+  <h2><%= link_to "エントリー一覧", user_entry_path(@user.id) %> </h2>
 </div>
 
 

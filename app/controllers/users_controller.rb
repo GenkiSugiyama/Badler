@@ -41,6 +41,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def entry_index
+    @user = User.find(params[:user_id])
+    @entries = EntryUser.where(user_id: @user.id)
+  end
+
+  def result
+  end
+
+  def result_update
+  end
+
   private
 
   def user_params

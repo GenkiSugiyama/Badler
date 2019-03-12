@@ -1,0 +1,12 @@
+<h2><%= @user.email %>のエントリー一覧</h2>
+<% @entries.each do |entry| %>
+  <ul>
+    <li>
+      <%= link_to event_path(entry.event_category.event_id) do %>
+        <%= entry.event_category.event.event %>
+      <% end %>
+    </li>
+    <li>
+    </li>
+  </ul>
+<% end %>

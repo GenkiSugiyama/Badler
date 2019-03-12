@@ -1,0 +1,6 @@
+<h2>エントリーフォーム</h2>
+<%= form_with(model:[:event, @entry_user], local: true) do |f| %>
+  <%= f.label :エントリー種目 %>
+  <%= f.collection_select :event_category_id, @event_categories, :id, :category_title, include_blank: "参加種目を選択してください" %>
+  <%= f.submit "エントリーを完了する" %>
+<% end %>

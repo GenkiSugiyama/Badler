@@ -9,11 +9,25 @@
 <h3>決済方法：<%= @event.payment_method %></h3>
 <h3>大会要項：<%= @event.event_detail %></h3>
 <h2>開催種目</h2>
-<% @categories.each do |category| %>
-  <h3>種目名：<%= category.category_title %></h3>
-  <h3>種目詳細：<%= category.category_detail %></h3>
-<% end %>
+<ul>
+  <% @categories.each do |category| %>
+    <li>種目名：<%= category.category_title %></li>
+    <ul>
+      <li>種目詳細：<%= category.category_detail %></li>
+      <li>種目ポイント一覧</li>
+        <ul>
+          <% category.category_results.each do |result| %>
+            <li>成績：<%= result.result %>/獲得ポイント：<%= result.result_point %></li>
+          <% end %>
+        </ul>
+    </ul>
+  <% end %>
+</ul>
 
+<div class="entry-box">
+  <%= link_to "エントリーする", new_event_entry_user_path(event_id: @event.id) %>
+</div>
+<%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
 <%= link_to "編集する", edit_event_path(@event.id) %>
 <%= link_to "削除する", event_path(@event.id), method: :delete %>
 

@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :club_menbers, dependent: :destroy
   has_many :clubs, through: :club_menbers
+  has_many :entry_users, dependent: :destroy
 end

@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event_category = @event.event_categories.build
+    @category_result = @event_category.category_results.build
   end
 
   def create
@@ -47,6 +48,6 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:event, :deadline, :date, :entry_fee, :total_capacity, :event_place, :place_address, :payment_method, :event_detail, event_categories_attributes: [:id, :category_title, :category_detail, :_destroy])
+    params.require(:event).permit(:event, :deadline, :date, :entry_fee, :total_capacity, :event_place, :place_address, :payment_method, :event_detail, event_categories_attributes: [:id, :category_title, :category_detail, :_destroy, category_results_attributes: [:id, :result, :result_point, :_destroy]])
   end
 end

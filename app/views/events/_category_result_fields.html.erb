@@ -1,0 +1,11 @@
+<div class='nested-fields'>
+  <div class="field">
+    <%= f.label :成績 %>
+    <%= f.text_field :result %>
+  </div>
+  <div class="field">
+    <%= f.label :ポイント %>
+    <%= f.number_field :result_point %>
+  </div>
+  <%= link_to_remove_association "成績削除", f %>
+</div>

@@ -1,2 +1,31 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h2>プロフィール編集</h2>
+<%= form_for(@user) do |f| %>
+  <div class="edit-user">
+    <label for="name">ユーザー名</label>
+    <%= f.text_field :name, id: "name" %>
+  </div>
+  <div class="edit-user">
+    <label for="email">メールアドレス</label>
+    <%= f.text_field :email, id: "email" %>
+  </div>
+  <div class="edit-user">
+    <label for="birthday">生年月日</label>
+    <%= f.date_field :birthday, id: "birthday" %>
+  </div>
+  <div class="edit-user">
+    <label for="sex">性別</label>
+    <%= f.select :sex, User.sexes.keys.to_a, {} %>
+  </div>
+  <div class="edit-user">
+    <label for="address">住所</label>
+    <%= f.text_field :address, id: "address" %>
+  </div>
+  <div class="edit-user">
+    <label for="profile">自己紹介</label>
+    <%= f.text_area :profile, id: "profile" %>
+  </div>
+  <div class="edit-user">
+    <%= f.submit "更新する" %>
+  </div>
+
+<% end %>

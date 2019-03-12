@@ -1,0 +1,17 @@
+ja:
+  enums:
+    user:
+      sex:
+        not_selected: "未選択"
+        male: "男性"
+        female: "女性"
+    club_menber:
+      status:
+        requesting: "申請中"
+        nomal: "一般"
+        admin: "管理者"
+        master_admin: "マスター管理者"
+        rejected: "ブロック"
+        unsubscribed: "退会"
+
+

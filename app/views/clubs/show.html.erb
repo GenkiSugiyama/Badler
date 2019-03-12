@@ -1,0 +1,29 @@
+<h2>クラブ詳細</h2>
+<h3>団体名：<%= @club.club_name %></h3>
+<h3>クラブプロフィール：<%= @club.club_profile %></h3>
+<h3>代表者：<%= @club.club_menbers.find_by(status: "master_admin").user.email %></h3>
+<h3>活動拠点（県）：<%= @club.practice_area_i18n %></h3>
+<h3>活動拠点（市以下）：<%= @club.area_detail %></h3>
+<h3>在籍人数：<%= @club.menber_amount %></h3>
+<%= link_to "メンバー一覧", club_club_menbers_path(@club.id) %>
+<h3>競技レベル：<%= @club.club_level %></h3>
+
+<% if current_user.club_menbers.find_by(club_id: @club.id).blank? || current_user.club_menbers.find_by(club_id: @club.id).status == "unsubscribed" %>
+  <div class="request">
+    <%= link_to "加入リクエストを送る", club_club_menbers_path(:club_id => @club.id), method: :post %>
+  </div>
+<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "rejected" %>
+  <div class="block">ブロックされています</div>
+<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "requesting" %>
+  <div class="request-done">リクエスト送信済み</div>
+<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "normal" %>
+  <div class="joined">加入済み</div>
+<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "admin" %>
+  admin
+  <%= link_to "編集", edit_club_path %>
+<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "master_admin" %>
+  master_admin
+  <%= link_to "編集", edit_club_path %>
+  <%= link_to "加入リクエスト一覧", club_club_menbers_requests_path(club_id: @club.id) %>
+  <%= link_to "大会を作成する", new_event_path %>
+<% end %>

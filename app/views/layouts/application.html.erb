@@ -6,10 +6,42 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header id="global-header">
+      <div id="global-header_inner">
+        <div id="global-header_logo">
+          <%= link_to "Top", root_path %> <%= current_user.email %>
+        </div>
+        <nav id="global-header_menu">
+          <ul id="global-header_items">
+            <li id="global-header_item">aboutへのリンク</li>
+            <% if user_signed_in? %>
+              <li id="global-header_item">ログイン中</li>
+              <li id="global-header_item"><%= link_to "ユーザー一覧", users_path %></li>
+              <li id="global-header_item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li id="global-header_item"><%= link_to "クラブを探す", clubs_path %></li>
+              <li id="global-header_item"><%= link_to "大会を探す", events_path %></li>
+            <% else %>
+              <li id="global-header_item"><p>未ログイン</p></li>
+              <li id="global-header_item"><%= link_to "新規登録", new_user_registration_path %></li>
+              <li id="global-header_item"><%= link_to "ログイン", new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="flash">
+        <% if flash[:notice] %>
+          <p id=notice><%= flash[:notice] %></p>
+        <% elsif flash[:alert] %>
+          <p id=alert><%= flash[:alert] %></p>
+        <% end %>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>

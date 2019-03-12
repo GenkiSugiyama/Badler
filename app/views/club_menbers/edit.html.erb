@@ -1,0 +1,5 @@
+<h2>メンバー権限変更</h2>
+<%= form_with model: @club_menber do |menber| %>
+  <%= f.select :status %>
+  <%= f.submit "変更する" %>
+<% end %>

@@ -1,4 +1,10 @@
-<h1>とりあえずトップ</h1>
-<%= link_to "新規登録", new_user_registration_path %>
-<%= link_to "ログイン", new_user_session_path %>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<h2>とりあえずトップ</h2>
+<%= @user.email %>
+<h4>参加中のクラブ一覧</h4>
+  <ul>
+    <% @clubs.each do |club| %>
+      <%= link_to club_path(club.id) do %>
+        <li><%= club.club_name %></li>
+      <% end %>
+    <% end %>
+  </ul>

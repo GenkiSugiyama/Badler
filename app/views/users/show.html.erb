@@ -1,15 +1,42 @@
-<h1>ユーザー詳細</h1>
-<h2><%= @user.name %></h2>
-<h2><%= @user.email %></h2>
+<h2>ユーザー詳細</h2>
+<h3>ユーザー名：<%= @user.name %></h3>
+<h3>メールアドレス：<%= @user.email %></h3>
+<h3>年齢：<%= @user.birthday %></h3>
+<h3>性別：<%= @user.sex_i18n %></h3>
+<h3>活動拠点：<%= @user.address %></h3>
+<h3>自己紹介：<%= @user.profile %></h3>
+<h4>
+  <%= link_to "ユーザー情報を編集する", edit_user_path %>
+</h4>
+
+<div class="user-clubs">
+  <h2>運営中・加入中のクラブ</h2>
+  <% @clubs.each do |club| %>
+    <% if club.club_menbers.find_by(user_id: @user.id).status == 3 %>
+      <div class="club-field">
+        <%= link_to club_path(club.id) do %>
+          <%= club.club_name %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="club-field">
+        <%= link_to club_path(club.id) do %>
+          <%= club.club_name %>
+        <% end %>
+        <p><strong>管理中のクラブ</strong></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
 
 <% if @user.id == current_user.id %>
-
 <% else %>
   <% if @isRoom == true %>
     <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
   <% else %>
     <%= form_for @room do |f| %>
-      <%= fields_for @entry do |e| %>
+      <%= fields_for(@entry, method: :post) do |e| %>
         <%= e.hidden_field :user_id, :value=> @user.id %>
       <% end %>
       <%= f.submit "チャットを始める" %>

@@ -1,0 +1,11 @@
+<div class='nested-fields'>
+  <div class="field">
+    <%= f.label :category_title %>
+    <%= f.text_field :category_title %>
+  </div>
+  <div class="field">
+    <%= f.label :category_detail %>
+    <%= f.text_area :category_detail %>
+  </div>
+  <%= link_to_remove_association "remove category", f %>
+</div>

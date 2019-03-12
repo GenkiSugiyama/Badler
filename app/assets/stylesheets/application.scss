@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "bootstrap";
+
+body {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+}
+
+#global-header {
+  width: 100%;
+  height: 80px;
+  display: block;
+  z-index: 1000;
+  position: fixed;
+  background-color: black;
+}
+
+#global-header_inner {
+  display: flex;
+}
+
+#global-header_items {
+  display: flex;
+}
+

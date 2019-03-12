@@ -1,0 +1,10 @@
+<h2>加入リクエスト一覧</h2>
+<% @requests.each do |club_menber| %>
+  <%= link_to user_path(club_menber.user.id) do %>
+    <%= club_menber.user.email %>
+  <% end %>
+  <% if current_user.club_menbers.find_by(club_id: params[:club_id]).status_before_type_cast >= 200 %>
+    <%= link_to "承認する", club_club_menbers_requests_path(id: club_menber.id, club_id: params[:club_id]), method: :post %>
+    <%= link_to "削除",club_club_menber_path(id: club_menber.id, club_id: params[:club_id]), mothod: :delete %>
+  <% end %>
+<% end %>

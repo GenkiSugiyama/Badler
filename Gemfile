@@ -63,3 +63,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'jquery-rails'
 gem 'enum_help'
+gem 'pry-rails'
+gem 'cocoon'
+gem 'bootstrap','~> 4.1.1'
+gem 'jquery-ui-rails'

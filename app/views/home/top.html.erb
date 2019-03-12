@@ -1,10 +1,10 @@
 <h2>とりあえずトップ</h2>
 <%= @user.email %>
 <h4>参加中のクラブ一覧</h4>
-  <ul>
-    <% @clubs.each do |club| %>
-      <%= link_to club_path(club.id) do %>
-        <li><%= club.club_name %></li>
-      <% end %>
+<ul>
+  <% @clubs.each do |club| %>
+    <%= link_to club_path(club.id) do %>
+      <li><%= club.club_name %></li>
     <% end %>
-  </ul>
+  <% end %>
+</ul>

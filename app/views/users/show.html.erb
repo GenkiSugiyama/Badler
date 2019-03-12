@@ -5,10 +5,12 @@
 <h3>性別：<%= @user.sex_i18n %></h3>
 <h3>活動拠点：<%= @user.address %></h3>
 <h3>自己紹介：<%= @user.profile %></h3>
-<h4>
-  <%= link_to "ユーザー情報を編集する", edit_user_path %>
-</h4>
-
+<% if current_user == @user %>
+  <h6>
+    <%= link_to "ユーザー情報を編集する", edit_user_path %>
+  </h6>
+<% else %>
+<% end %>
 <div class="user-clubs">
   <h2>運営中・加入中のクラブ</h2>
   <% @clubs.each do |club| %>

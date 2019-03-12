@@ -22,22 +22,47 @@ body {
   border:0;
   outline:0;
   font-size:100%;
+  vertical-align: baseline;
 }
+
+
 
 #global-header {
   width: 100%;
   height: 80px;
   display: block;
-  z-index: 1000;
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   background-color: black;
 }
 
+
 #global-header_inner {
+  height: 80px;
   display: flex;
+}
+
+#global-header_menu {
+  vertical-align: center;
+  display: flex;
+  justify-content: flex-end;
 }
 
 #global-header_items {
   display: flex;
+  justify-content: flex-end;
+  list-style: none;
 }
 
+#global-header_item {
+  padding-right: 20px;
+  color: white;
+  height: 80px;
+  vertical-align: center;
+}
+
+.main {
+  background-color: orange;
+  height: 2000px;
+}

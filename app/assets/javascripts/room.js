@@ -1,6 +1,6 @@
 $(function(){
   function buildMESSAGE(message) {
-    var messages = $('ul').append('<li class="messages" data-id=' + message.id + '><strong>' + message.message + '</strong></li><hr>');
+    var messages = $('#messages-area').append('<li class="messages" data-id=' + message.id + '><strong>' + message.content + '</strong></li><hr>');
   }
     $(function(){
       setInterval(update, 10000);

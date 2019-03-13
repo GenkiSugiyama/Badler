@@ -16,7 +16,7 @@
   <% @clubs.each do |club| %>
     <% if club.club_menbers.find_by(user_id: @user.id).status_before_type_cast >= 100 %>
       <div class="club-field">
-        <%= link_to club_path(club.id) do %>
+        <%= link_to(club_path(club.id), style: "color:black;") do %>
           <%= club.club_name %>
         <% end %>
       </div>
@@ -25,7 +25,9 @@
 </div>
 
 <div class="user-entry">
-  <h2><%= link_to "エントリー一覧", user_entry_path(@user.id) %> </h2>
+  <h2>大会情報</h2>
+  <h3>総獲得ポイント：<%= @total_points %></h3>
+  <h3><%= link_to "エントリー一覧", user_entries_path(@user.id) %> </h3>
 </div>
 
 

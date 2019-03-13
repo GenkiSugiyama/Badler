@@ -3,8 +3,8 @@
 <h3>エントリー期日：<%= @event.deadline %></h3>
 <h3>開催日：<%= @event.date %></h3>
 <h3>参加費：<%= @event.entry_fee %>円</h3>
-<h3>エントリー定員数：<%= @event.total_capacity %></h3>
-<h3>開催場所：<%= @event.event_place %>人</h3>
+<h3>エントリー定員数：<%= @event.total_capacity %>人　現在のエントリー人数：<%= @event.entry_users.count %>人</h3>
+<h3>開催場所：<%= @event.event_place %></h3>
 <h3>住所：<%= @event.place_address %></h3>
 <h3>決済方法：<%= @event.payment_method %></h3>
 <h3>大会要項：<%= @event.event_detail %></h3>
@@ -24,10 +24,22 @@
   <% end %>
 </ul>
 
-<div class="entry-box">
-  <%= link_to "エントリーする", new_event_entry_user_path(event_id: @event.id) %>
-</div>
-<%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
-<%= link_to "編集する", edit_event_path(@event.id) %>
-<%= link_to "削除する", event_path(@event.id), method: :delete %>
+<% if @event.user_entried?(current_user) %>
+  <div class="entry-box">
+    エントリー済み
+  </div>
+<% else %>
+  <div class="entry-box">
+    <%= link_to "エントリーする", new_event_entry_user_path(event_id: @event.id) %>
+  </div>
+<% end%>
+
+<% if @event.club.club_menber?(current_user) %>
+  <%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
+<% elsif @event.club.club_admin?(current_user) %>
+  <%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
+  <%= link_to "編集する", edit_event_path(@event.id) %>
+  <%= link_to "削除する", event_path(@event.id), method: :delete %>
+<% else %>
+<% end %>
 

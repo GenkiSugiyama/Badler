@@ -14,13 +14,17 @@
     <header id="global-header">
       <div id="global-header_inner">
         <div id="global-header_logo">
-          <%= link_to "Top", root_path %> <%= current_user.email %>
+          <%= link_to "Top", root_path %>
         </div>
         <nav id="global-header_menu">
           <ul id="global-header_items">
             <li id="global-header_item">aboutへのリンク</li>
             <% if user_signed_in? %>
-              <li id="global-header_item">ログイン中</li>
+              <li id="global-header_item">
+                <%= link_to user_path(current_user.id) do %>
+                  <%= current_user.email %>
+                <% end %>
+              </li>
               <li id="global-header_item"><%= link_to "クラブを探す", clubs_path, style: "color:white;" %></li>
               <li id="global-header_item"><%= link_to "大会を探す", events_path, style: "color:white;" %></li>
               <li id="global-header_item"><%= link_to "ユーザー一覧", users_path, style: "color:white;" %></li>

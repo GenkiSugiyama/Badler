@@ -13,4 +13,12 @@ class Club < ApplicationRecord
   has_many :club_menbers, dependent: :destroy
   has_many :users, through: :club_menbers
   has_many :events, dependent: :destroy
+
+  def club_menber?(user)
+    club_menbers.find_by(user_id: user.id).status_before_type_cast == 100
+  end
+
+  def club_admin?(user)
+    club_menbers.find_by(user_id: user.id).status_before_type_cast >= 200
+  end
 end

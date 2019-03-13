@@ -2,11 +2,14 @@
 <% @entries.each do |entry| %>
   <ul>
     <li>
-      <%= link_to event_path(entry.event_category.event_id) do %>
+      <%= link_to event_path(entry.event_category.event.id) do %>
         <%= entry.event_category.event.event %>
       <% end %>
+      <%= link_to "結果入力", user_entry_path(@user.id, entry.id) %><span>/</span>
+      <%= link_to "キャンセルする", user_destroy_entry_user_path(@user.id, entry.id), method: :delete %>
     </li>
     <li>
+      出場種目：<%= entry.event_category.category_title %><span>/</span>獲得ポイント：<%= entry.category_result.result_point %>
     </li>
   </ul>
 <% end %>

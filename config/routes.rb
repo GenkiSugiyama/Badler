@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, only: [:index, :show, :edit, :update] do
-    get 'entry_index', to: 'users#entry_index', as: 'entry'
-    get 'entry_result/:id', to: 'users#result', as: 'event_result'
-    post 'entry_result/id', to: 'users#result_update', as: 'result_update'
+    get 'entries', to: 'users#entry_index', as: 'entries'
+    get 'entry_result/:id', to: 'users#entry', as: 'entry'
+    patch 'entry_result/:id', to: 'users#entry_update', as: 'entry_user'
+    delete 'entry_result/:id', to: 'users#entry_destroy', as: 'destroy_entry_user'
   end
   resources :messages, :only => [:create]
   resources :rooms, :only => [:create, :show, :index]

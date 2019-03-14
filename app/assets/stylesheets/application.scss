@@ -16,7 +16,7 @@
 
  @import "bootstrap";
 
-body {
+* {
   margin:0;
   padding:0;
   border:0;
@@ -61,7 +61,7 @@ body {
   height: 60px;
 }
 
-.main {
+#global-header_item:hover {
   background-color: orange;
-  height: 2000px;
 }
+

@@ -1,4 +1,7 @@
+
 <div class="box">
+  <%= video_tag("/assets/videos/testmovie.mp4", autoplay: true, loop: true, muted: true, style: "width:100%;") %>
+  <div class="login_form">
   <h2>Log in</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -25,4 +28,5 @@
   <% end %>
 
   <%= render "users/shared/links" %>
+  </div>
 </div>

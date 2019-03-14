@@ -1,3 +1,6 @@
+
+<%= line_chart User.group_by_day(:created_at).count %>
+
 <h2>ユーザー詳細</h2>
 <h3>ユーザー名：<%= @user.name %></h3>
 <h3>メールアドレス：<%= @user.email %></h3>

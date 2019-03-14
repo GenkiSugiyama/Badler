@@ -8,12 +8,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @clubs = @user.clubs
     # 総獲得ポイントを計算
-    entry_results = EntryUser.where(user_id: @user.id)
-      total = 0
-      entry_results.each do |result|
-        total += result.category_result.result_point
-      end
-    @total_points = total
+      # entry_results = EntryUser.where(user_id: @user.id)
+      #   total = 0
+      #   entry_results.each do |result|
+      #     total += result.category_result.result_point
+      #   end
+      # @total_points = total
+    total_points = CategoryResult.joins(:entry_users).group(:user_id).sum(:result_point)
+    
     # チャット判断
     currentUserEntry = Entry.where(user_id: current_user.id)
     userEntry = Entry.where(user_id: @user.id)
@@ -51,7 +53,7 @@ class UsersController < ApplicationController
 
   def entry_index
     @user = User.find(params[:user_id])
-    @entries = EntryUser.where(user_id: @user.id)
+    @entries = @user.entry_users
   end
 
   def entry

@@ -5,11 +5,18 @@
       <%= link_to event_path(entry.event_category.event.id) do %>
         <%= entry.event_category.event.event %>
       <% end %>
-      <%= link_to "結果入力", user_entry_path(@user.id, entry.id) %><span>/</span>
-      <%= link_to "キャンセルする", user_destroy_entry_user_path(@user.id, entry.id), method: :delete %>
+        <% if entry.can_result?(entry.id) %>
+          <%= link_to "結果入力", user_entry_path(@user.id, entry.id) %>
+        <% else %>
+        <% end %>
+          <span>/</span>
+          <%= link_to "キャンセルする", user_destroy_entry_user_path(@user.id, entry.id), method: :delete %>
     </li>
+  <% if entry.category_result_id.nil? %>
+  <% else %>
     <li>
       出場種目：<%= entry.event_category.category_title %><span>/</span>獲得ポイント：<%= entry.category_result.result_point %>
     </li>
+  <% end %>
   </ul>
 <% end %>

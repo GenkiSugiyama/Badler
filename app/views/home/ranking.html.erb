@@ -1,0 +1,18 @@
+<h2>ユーザー一覧</h2>
+
+<table>
+  <thead>
+    <th>ユーザー名</th>
+    <th>獲得ポイント</th>
+  </thead>
+    <% @ranking.each do |a,b| %>
+      <tbody>
+        <td>
+          <%= link_to user_path(a.to_i) do %>
+            <%= a %>
+          <% end %>
+        </td>
+        <td><%= b %></td>
+      </tbody>
+    <% end %>
+</table>

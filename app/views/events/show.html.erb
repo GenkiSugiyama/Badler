@@ -23,23 +23,30 @@
     </ul>
   <% end %>
 </ul>
-
-<% if @event.user_entried?(current_user) %>
-  <div class="entry-box">
-    エントリー済み
-  </div>
+<% if @event.can_entry?(@event.id) %>
+  <% if @event.user_entried?(current_user) %>
+    <div class="entry-box">
+      エントリー済み
+    </div>
+  <% else %>
+    <div class="entry-box">
+      <%= link_to "エントリーする", new_event_entry_user_path(event_id: @event.id) %>
+    </div>
+  <% end%>
 <% else %>
   <div class="entry-box">
-    <%= link_to "エントリーする", new_event_entry_user_path(event_id: @event.id) %>
+    エントリー終了
   </div>
-<% end%>
-
-<% if @event.club.club_menber?(current_user) %>
+<% end %>
+<% if @event.club.not_menber?(current_user) %>
+  <%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
+<% elsif @event.club.blocked_menber?(current_user)%>
+  ブロックされています 
+<% elsif @event.club.menber?(current_user)%>
   <%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
 <% elsif @event.club.club_admin?(current_user) %>
   <%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
   <%= link_to "編集する", edit_event_path(@event.id) %>
   <%= link_to "削除する", event_path(@event.id), method: :delete %>
-<% else %>
 <% end %>
 

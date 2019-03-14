@@ -9,4 +9,8 @@ class Event < ApplicationRecord
     entry_users.find_by(user_id: user.id).present?
   end
 
+  def can_entry?(id)
+    Date.today < Event.find(id).deadline
+  end
+
 end

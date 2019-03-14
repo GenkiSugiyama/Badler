@@ -14,7 +14,15 @@ class Club < ApplicationRecord
   has_many :users, through: :club_menbers
   has_many :events, dependent: :destroy
 
-  def club_menber?(user)
+  def not_menber?(user)
+    user.club_menbers.empty?
+  end
+
+  def blocked_menber?(user)
+    club_menbers.find_by(user_id: user.id).status_before_type_cast == 0
+  end
+
+  def menber?(user)
     club_menbers.find_by(user_id: user.id).status_before_type_cast == 100
   end
 

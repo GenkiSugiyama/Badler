@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :name, presence: true, uniqueness: true
+
   enum sex: { not_selected: 0, male: 1, female: 2 }
 
   has_many :entries, dependent: :destroy

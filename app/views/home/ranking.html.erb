@@ -5,14 +5,14 @@
     <th>ユーザー名</th>
     <th>獲得ポイント</th>
   </thead>
-    <% @ranking.each do |a,b| %>
+    <% @ranking.each do |rank| %>
       <tbody>
         <td>
-          <%= link_to user_path(a.to_i) do %>
-            <%= a %>
+          <%= link_to user_path(rank[:id]) do %>
+            <%= rank[:name] %>
           <% end %>
         </td>
-        <td><%= b %></td>
+        <td><%= rank[:point] %></td>
       </tbody>
     <% end %>
 </table>

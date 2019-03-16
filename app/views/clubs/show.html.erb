@@ -3,7 +3,7 @@
 <h3>クラブプロフィール：<%= @club.club_profile %></h3>
 <h3>代表者：<%= @club.club_menbers.find_by(status: "master_admin").user.email %></h3>
 <h3>活動拠点（県）：<%= @club.practice_area_i18n %></h3>
-<h3>活動拠点（市以下）：<%= @club.area_detail %></h3>
+<h3>主な練習場所（市以下）：<%= @club.area_detail %></h3>
 <h3>在籍人数：<%= @club.menber_amount %></h3>
 <%= link_to "メンバー一覧", club_club_menbers_path(@club.id) %>
 <h3>競技レベル：<%= @club.club_level %></h3>

@@ -1,10 +1,37 @@
-<h2>とりあえずトップ</h2>
-<%= @user.email %>
-<h4>参加中のクラブ一覧</h4>
-<ul>
-  <% @clubs.each do |club| %>
-    <%= link_to club_path(club.id) do %>
-      <li><%= club.club_name %></li>
+<div class="main-visual">
+  <div class="main-title">
+    <h1>バドミントンを愛する全ての人へ</h1>
+  </div>
+</div>
+<div class="main-box">
+  <h1>Badler</h1>
+  <p>is Portal Site Of the Badler, By the Badler, For the Badler</p>
+  <div class="box">
+  </div>
+</div>
+<div class="select-boxes">
+  <div class="box1">
+    <h3>新着クラブ</h3>
+    <% @clubs.each do |club| %>
+      <div class="club-box">
+        <%= club.club_name %>
+        <%= club.practice_area %>
+      </div>
     <% end %>
-  <% end %>
-</ul>
+    <%= link_to "クラブ一覧へ", clubs_path %>
+  </div>
+  <div class="box2">
+    <h3>バドラーとは</h3>
+  </div>
+  <div class="box3">
+    <h3>新着大会</h3>
+    <div class="event-box">
+    <% @events.each do |event| %>
+      <div class="club-box">
+        <%= event.event %>
+        <%= event.event_place %>
+      </div>
+    <% end %>
+    <%= link_to "大会一覧へ", events_path %>
+  </div>
+</div>

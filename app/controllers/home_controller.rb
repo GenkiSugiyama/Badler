@@ -1,14 +1,24 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:ranking]
   def top
-    @user = current_user
-    @clubs = @user.clubs
+    @clubs = Club.limit(3).order("created_at desc")
+    @events = Event.limit(3).order("created_at desc")
   end
 
   def about
   end
 
   def ranking
-    @ranking = CategoryResult.joins(:entry_users).group(:user_id).sum(:result_point).sort_by { |_, b| b }.reverse
+    ranks = CategoryResult.joins(:entry_users).group(:user_id).sum(:result_point).sort_by { |_, b| b }.reverse
+    @ranking = [];
+    count_h = 0
+
+    ranks.each do |rank|
+      r = {}
+      user = User.find(rank[0])
+      r = {:id => user.id.to_s, :name => user.name, :point=> rank[1].to_s}
+      @ranking[count_h] = r
+      count_h += 1
+    end
   end
 end

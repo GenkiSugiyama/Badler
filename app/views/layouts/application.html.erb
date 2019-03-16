@@ -18,35 +18,36 @@
         </div>
         <nav id="global-header_menu">
           <ul id="global-header_items">
-            <li id="global-header_item">aboutへのリンク</li>
             <li id="global-header_item">
-              <%= link_to "ポイントランキング", ranking_path, style: "color:white;" %>
+              <%= link_to "バドラーとは", about_path %>
+            </li>
+            <li id="global-header_item">
+              <%= link_to "ポイントランキング", ranking_path %>
             </li>
             <% if user_signed_in? %>
               <li id="global-header_item">
-                <%= link_to user_path(current_user.id) do %>
+                <%= link_to(user_path current_user.id) do %>
                   <%= current_user.email %>
                 <% end %>
               </li>
               <li id="global-header_item">
-                <%= link_to "クラブを探す", clubs_path, style: "color:white;" %>
+                <%= link_to "クラブを探す", clubs_path %>
               </li>
               <li id="global-header_item">
-                <%= link_to "大会を探す", events_path, style: "color:white;" %>
+                <%= link_to "大会を探す", events_path %>
               </li>
               <li id="global-header_item">
-                <%= link_to "ユーザー一覧", users_path, style: "color:white;" %>
+                <%= link_to "ユーザー一覧", users_path %>
               </li>
               <li id="global-header_item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, style: "color:white;" %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
               </li>
             <% else %>
-              <li id="global-header_item"><p>未ログイン</p></li>
               <li id="global-header_item">
-                <%= link_to "新規登録", new_user_registration_path, style: "color:white;" %>
+                <%= link_to "新規登録", new_user_registration_path %>
               </li>
               <li id="global-header_item">
-                <%= link_to "ログイン", new_user_session_path, style: "color:white;" %>
+                <%= link_to "ログイン", new_user_session_path %>
               </li>
             <% end %>
           </ul>

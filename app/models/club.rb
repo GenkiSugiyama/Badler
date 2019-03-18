@@ -10,6 +10,9 @@ class Club < ApplicationRecord
     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,沖縄県:47
   }
 
+  Geocoder.configure(language: :ja)
+  geocoded_by :area_detail
+  after_validation :geocode, if: :area_detail_changed?
   has_many :club_menbers, dependent: :destroy
   has_many :users, through: :club_menbers
   has_many :events, dependent: :destroy

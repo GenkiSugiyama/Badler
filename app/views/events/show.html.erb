@@ -6,6 +6,15 @@
 <h3>エントリー定員数：<%= @event.total_capacity %>人　現在のエントリー人数：<%= @event.entry_users.count %>人</h3>
 <h3>開催場所：<%= @event.event_place %></h3>
 <h3>住所：<%= @event.place_address %></h3>
+<div id="map" style="width: 800px; height: 400px;"></div>
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>
 <h3>決済方法：<%= @event.payment_method %></h3>
 <h3>大会要項：<%= @event.event_detail %></h3>
 <h2>開催種目</h2>

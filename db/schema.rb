@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_092424) do
+ActiveRecord::Schema.define(version: 2019_03_16_102333) do
 
   create_table "category_results", force: :cascade do |t|
     t.integer "event_category_id"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2019_03_12_092424) do
     t.string "club_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "entries", force: :cascade do |t|
@@ -75,6 +77,8 @@ ActiveRecord::Schema.define(version: 2019_03_12_092424) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "event_detail"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "messages", force: :cascade do |t|

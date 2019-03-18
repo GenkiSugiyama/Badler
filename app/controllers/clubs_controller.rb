@@ -27,6 +27,11 @@ class ClubsController < ApplicationController
     @club = Club.find(params[:id])
     @club_menber = ClubMenber.new
     @events = @club.events
+    @hash = Gmaps4rails.build_markers(@club) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow place.club_name
+    end
   end
 
   def edit
@@ -35,6 +40,10 @@ class ClubsController < ApplicationController
 
   def update
     @club = Club.find(params[:id])
+    @club.update(club_params)
+    @club.save
+    redirect_to club_path(@club.id)
+
   end
 
   def destroy

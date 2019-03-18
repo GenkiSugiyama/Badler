@@ -20,6 +20,11 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @categories = @event.event_categories
+    @hash = Gmaps4rails.build_markers(@event) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow place.event
+    end
   end
 
   def index
@@ -48,6 +53,6 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:event, :deadline, :date, :entry_fee, :total_capacity, :event_place, :place_address, :payment_method, :event_detail, event_categories_attributes: [:id, :category_title, :category_detail, :_destroy, category_results_attributes: [:id, :result, :result_point, :_destroy]])
+    params.require(:event).permit(:event, :deadline, :date, :entry_fee, :total_capacity, :event_place, :place_address, :latitude, :longitude, :payment_method, :event_detail, event_categories_attributes: [:id, :category_title, :category_detail, :_destroy, category_results_attributes: [:id, :result, :result_point, :_destroy]])
   end
 end

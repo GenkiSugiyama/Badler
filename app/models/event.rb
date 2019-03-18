@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+
+  geocoded_by :place_address
+  after_validation :geocode, if: :place_address_changed?
   belongs_to :club
   has_many :event_categories
   has_many :entry_users, through: :event_categories

@@ -34,11 +34,23 @@ class ClubsController < ApplicationController
   end
 
   def update
-    @club = Club.find(params[:id])
+    club = Club.find(params[:id])
+    if club.update(club_params)
+      flash[:notice] = "編集が完了しました"
+      redirect_to club_path(club.id)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-    @club = Club.find(params[:id])
+    club = Club.find(params[:id])
+    user = current_user
+    if club.destroy
+      flash[:notice] = "削除が完了しました"
+      redirect_to user_path(current_user.id)
+    else
+    end
   end
 
   private

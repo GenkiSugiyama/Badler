@@ -8,14 +8,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @clubs = @user.clubs
     # 総獲得ポイントを計算
-      # entry_results = EntryUser.where(user_id: @user.id)
-      #   total = 0
-      #   entry_results.each do |result|
-      #     total += result.category_result.result_point
-      #   end
-      # @total_points = total
-    total_points = CategoryResult.joins(:entry_users).group(:user_id).sum(:result_point)
-    
+    entry_results = EntryUser.where(user_id: @user.id)
+      total = 0
+      entry_results.each do |result|
+        if result.category_result.present?
+          total += result.category_result.result_point
+        else
+        end
+      end
+    @total_points = total
+    # グラフ用の変数
+    @result_point = EntryUser.joins({:category_result => {:event_category => :event}}).where(user_id: @user.id)
     # チャット判断
     currentUserEntry = Entry.where(user_id: current_user.id)
     userEntry = Entry.where(user_id: @user.id)

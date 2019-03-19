@@ -1,3 +1,33 @@
+<div class="wrap">
+  <ul id="tab-menu" class="clearfix">
+    <li><a href="#tab1" class="active">大会ごとの獲得ポイント</a></li>
+    <li><a href="#tab2" class="">総取得ポイント</a></li>
+  </ul>
+
+  <div id="tab-contents" class="clearfix">
+    <div id="tab1" class="tab">
+      <%= line_chart @result_point.pluck(:date, :result_point), xtitle: "開催日", ytitle: "獲得ポイント", width: "800px", height: "500px", curve: false, class: "chart" %>
+    </div>
+    <div id="tab2" class="tab">
+      <p>日付ごとの合計値のグラフ（右肩上がり）を表示したい！</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('#tab-contents .tab[id != "tab1"]').hide();
+
+ $('#tab-menu a').on('click', function() {
+  $("#tab-contents .tab").hide();
+  $("#tab-menu .active").removeClass("active");
+  $(this).addClass("active");
+  $($(this).attr("href")).show();
+  return false;
+});
+</script>
+
+
 <h2>ユーザー詳細</h2>
 <h3>ユーザー名：<%= @user.name %></h3>
 <h3>メールアドレス：<%= @user.email %></h3>

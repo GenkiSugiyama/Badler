@@ -29,3 +29,49 @@ video {
 span {
   color: white;
 }
+
+.wrap{
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+ 
+.clearfix:after{
+  content:"";
+  clear: both;
+  display: block;
+}
+ 
+#tab-menu li {
+  float: left;
+  list-style-type: none;
+  width: 50%;
+}
+ 
+#tab-menu a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  background: #000;
+  border: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+ 
+#tab-menu .active {
+  background: #fff;
+  color: #000;
+}
+ 
+#tab-contents .tab {
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #000;
+  border-top: none;
+}
+ 
+#tab-contents p{
+  color:#000;
+  line-height: 2.5;
+}

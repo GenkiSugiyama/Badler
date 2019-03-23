@@ -25,6 +25,10 @@
   vertical-align: baseline;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 #global-header {
   width: 100%;
   height: 60px;
@@ -64,7 +68,7 @@
 }
 #global-header_item a{
   line-height: 60px;
-  color: #808080;
+  color: orange;
   transition: 0.3s ease-out;
   text-decoration: none;
 }

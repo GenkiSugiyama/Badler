@@ -17,8 +17,16 @@ class UsersController < ApplicationController
         end
       end
     @total_points = total
-    # グラフ用の変数
-    @result_point = EntryUser.joins({:category_result => {:event_category => :event}}).where(user_id: @user.id)
+    # グラフ用の変数    @test = @result_point.pluck(:date, :result_point)
+    # 各大会ごとの獲得ポイント取得
+    @result_graph = EntryUser.joins({:category_result => {:event_category => :event}}).where(user_id: @user.id)
+    # 合算値を取得
+    @total_graph = @result_graph.pluck(:date, :result_point)
+    # 初回は一つ前の値はいらないので配列の2番目（[1]）から繰り返す
+    # 配列は0から始まってくので繰り返しの回数の上限は「配列の個数（.length）-1」となる
+    for i in 1..@total_graph.length-1
+      @total_graph[i][1] += @total_graph[i-1][1]
+    end
     # チャット判断
     currentUserEntry = Entry.where(user_id: current_user.id)
     userEntry = Entry.where(user_id: @user.id)

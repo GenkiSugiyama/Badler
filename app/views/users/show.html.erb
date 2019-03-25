@@ -6,10 +6,10 @@
 
   <div id="tab-contents" class="clearfix">
     <div id="tab1" class="tab">
-      <%= line_chart @result_point.pluck(:date, :result_point), xtitle: "開催日", ytitle: "獲得ポイント", width: "800px", height: "500px", curve: false, class: "chart" %>
+      <%= line_chart @result_graph.pluck(:date, :result_point), xtitle: "開催日", ytitle: "獲得ポイント", width: "800px", height: "500px", curve: false, class: "chart" %>
     </div>
     <div id="tab2" class="tab">
-      <p>日付ごとの合計値のグラフ（右肩上がり）を表示したい！</p>
+      <%= line_chart @total_graph, xtitle: "開催日", ytitle: "獲得ポイント", width: "800px", height: "500px", curve: false, class: "chart" %>
     </div>
   </div>
 </div>

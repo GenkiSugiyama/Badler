@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all
+    @events = Event.page(params[:page]).per(8).order("created_at DESC")
   end
 
   def edit

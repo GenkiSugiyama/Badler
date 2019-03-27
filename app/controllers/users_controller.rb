@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
   def entry_index
     @user = User.find(params[:user_id])
-    @entries = @user.entry_users
+    @entries = @user.entry_users.page(params[:page]).per(15).order("created_at DESC")
   end
 
   def entry

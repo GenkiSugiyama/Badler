@@ -1,22 +1,42 @@
-<h2><%= @user.email %>のエントリー一覧</h2>
-<% @entries.each do |entry| %>
-  <ul>
-    <li>
-      <%= link_to event_path(entry.event_category.event.id) do %>
-        <%= entry.event_category.event.event %>
-      <% end %>
-        <% if entry.can_result?(entry.id) %>
-          <%= link_to "結果入力", user_entry_path(@user.id, entry.id) %>
-        <% else %>
+<div class="entry-index">
+  <h2><%= @user.email %>のエントリー一覧</h2>
+  <table class="entry-table">
+    <tr>
+      <th class="entry-th">大会名</th>
+      <th class="entry-th">開催日</th>
+      <th class="entry-th">出場種目</th>
+      <th class="entry-th">結果(獲得ポイント)</th>
+      <th class="entry-th"></th>
+    </tr>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td>
+          <%= link_to event_path(entry.event_category.event.id) do %>
+            <%= entry.event_category.event.event %>
+          <% end %>
+        </td>
+        <td>
+          <%= entry.event_category.event.date %>
+        </td>
+        <% if entry.can_result?(entry.id) && entry.category_result_id.nil? %>
+          <td>未入力</td>
+          <td>未入力</td>
+          <td><%= link_to "結果入力", user_entry_path(@user.id, entry.id) %></td>
+        <% elsif entry.category_result_id.nil? %>
+          <td>未開催</td>
+          <td>未開催</td>
+          <td></td>
+        <% elsif %>
+          <td><%= entry.event_category.category_title %></td>
+          <td>
+            <%= entry.category_result.result %>
+            (<%= entry.category_result.result_point %>pt)
+          </td>
+          <td>
+            <%= link_to "結果の編集", user_entry_path(@user.id, entry.id) %>
+          </td>
         <% end %>
-          <span>/</span>
-          <%= link_to "キャンセルする", user_destroy_entry_user_path(@user.id, entry.id), method: :delete %>
-    </li>
-  <% if entry.category_result_id.nil? %>
-  <% else %>
-    <li>
-      出場種目：<%= entry.event_category.category_title %><span>/</span>獲得ポイント：<%= entry.category_result.result_point %>
-    </li>
-  <% end %>
-  </ul>
-<% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

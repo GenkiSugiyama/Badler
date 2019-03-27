@@ -1,30 +1,52 @@
-<h1>DM</h1>
+<h3 id="me" user_id=<%= current_user.id %> >あなたは<%= User.find(current_user.id).name %> です</h3>
 
-<h4>参加者</h4>
-<% @entries.each do |e| %>
-  <h5><strong><a href="/users/<%= e.user.id %>"><%= e.user.email%>さん</a></strong></h5>
-<% end %>
-
-<hr>
-<% if @messages.present? %>
-  <ul id="messages-area">
-    <% @messages.each do |m| %>
-      <li class="messages" data-id=<%= m.id %>>
-        <strong><%= m.content %></strong>
-        <small>by <strong><a href="/users/<%= m.user_id %>"><%= m.user.email %>さん</a></strong></small>
-      </li>
-      <hr>
+<div id="your_container">
+  <!-- ①チャットの外側部分 -->
+  <div id="messages_container">
+    <!-- ②ヘッダー部分 -->
+    <div id="chat_header">
+      <!-- ステータス -->
+      <div id="chat_user_status">
+        <!-- 相手の名前をどう持ってくる？？ -->
+        <div id="chat_user_name"></div>
+      </div>
+    </div>
+    <!-- ③タイムライン部分 -->
+    <% if @messages.present? %>
+      <div id="messages">
+        <% @messages.each do |m| %>
+          <% if m.user_id != current_user.id %>
+            <!-- 相手メッセージ -->
+            <div class="message left">
+              <div class="message_box">
+                <div class="message_content" data-id=<%= m.id %>>
+                  <!-- ここにメッセージ -->
+                  <div class="message_text"><%= m.content %></div>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          <% else %>
+            <!-- 自分メッセージ -->
+            <div class="message right">
+              <div class="message_box">
+                <div class="message_content" data-id=<%= m.id %>>
+                  <div class="message_text"><%= m.content %></div>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <h3 class="text-center">メッセージはまだありません</h3>
     <% end %>
-  </ul>
-<% else %>
-  <h3 class="text-center">メッセージはまだありません</h3>
-<% end %>
-
-<%= form_with(model: [@message]) do |f| %>
-  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
-  <%= f.hidden_field :room_id, :value => @room.id %>
-  <br>
-  <%= f.submit "投稿する" %>
-<% end %>
-
-<%= link_to "ユーザー一覧に戻る", users_path %>
+    <!-- ④テキストボックス、送信ボタン -->
+      <%= form_with(model: [@message], class: "send") do |f| %>
+        <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70, class: "send_message" %>
+        <%= f.hidden_field :room_id, :value => @room.id %>
+        <%= f.submit "投稿する", class: "send_btn" %>
+      <% end %>
+  </div>
+</div>

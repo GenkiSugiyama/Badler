@@ -64,7 +64,7 @@
 <% if @user.id == current_user.id %>
 <% else %>
   <% if @isRoom == true %>
-    <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
+    <p><a href="/rooms/<%= @roomId %>">チャットへ</a></p>
   <% else %>
     <%= form_for @room do |f| %>
       <%= fields_for(@entry, method: :post) do |e| %>

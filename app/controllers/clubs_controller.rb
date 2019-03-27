@@ -20,13 +20,32 @@ class ClubsController < ApplicationController
   end
 
   def index
-    @clubs = Club.all
+    @clubs = Club.page(params[:page]).per(8).order("created_at DESC")
   end
 
   def show
     @club = Club.find(params[:id])
     @club_menber = ClubMenber.new
     @events = @club.events
+    @admin_user = @club.club_menbers.find_by(status: "master_admin").user
+    currentUserEntry = Entry.where(user_id: current_user.id)
+    userEntry = Entry.where(user_id: @admin_user.id)
+    if @admin_user.id == current_user.id
+    else
+      currentUserEntry.each do |cu|
+        userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      if @isRoom
+      else
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def edit

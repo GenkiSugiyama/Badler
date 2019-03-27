@@ -1,45 +1,96 @@
-<h2>クラブ詳細</h2>
-<h3>団体名：<%= @club.club_name %></h3>
-<h3>クラブプロフィール：<%= @club.club_profile %></h3>
-<h3>代表者：<%= @club.club_menbers.find_by(status: "master_admin").user.email %></h3>
-<h3>活動拠点（県）：<%= @club.practice_area_i18n %></h3>
-<h3>主な練習場所（市以下）：<%= @club.area_detail %></h3>
-<h3>在籍人数：<%= @club.menber_amount %></h3>
-<%= link_to "メンバー一覧", club_club_menbers_path(@club.id) %>
-<h3>競技レベル：<%= @club.club_level %></h3>
-
-<% if current_user.club_menbers.find_by(club_id: @club.id).blank? || current_user.club_menbers.find_by(club_id: @club.id).status == "unsubscribed" %>
-  <div class="request">
-    <%= link_to "加入リクエストを送る", club_club_menbers_path(:club_id => @club.id), method: :post %>
+<div class="show">
+  <div class="club-header clearfix">
+    <h2>クラブ詳細</h2>
+      <div class="admin-menu">
+        <% if current_user.club_menbers.find_by(club_id: @club.id).status == "admin" %>
+          <%= link_to "編集", edit_club_path %>
+        <% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "master_admin" %>
+          <%= link_to "編集", edit_club_path(@club.id) %>
+          <%= link_to "加入リクエスト一覧", club_club_menbers_requests_path(club_id: @club.id) %>
+          <%= link_to "大会を作成する", new_event_path %>
+        <% end %>
+      </div>
+      <% if @admin_user.id == current_user.id %>
+      <% else %>
+        <% if @isRoom == true %>
+          <div class="chat-button">
+            <p><a href="/rooms/<%= @roomId %>">代表者へチャットを送る</a></p>
+          </div>
+        <% else %>
+          <div class="chat-button">
+            <%= form_for @room do |f| %>
+              <%= fields_for(@entry, method: :post) do |e| %>
+                <%= e.hidden_field :user_id, :value=> @user.id %>
+              <% end %>
+              <%= f.submit "代表者へチャットを送る" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <div class="request-button">
+      <% if current_user.club_menbers.find_by(club_id: @club.id).blank? || current_user.club_menbers.find_by(club_id: @club.id).status == "unsubscribed" %>
+        <div class="request">
+          <%= link_to "加入リクエストを送る", club_club_menbers_path(:club_id => @club.id), method: :post %>
+        </div>
+      <% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "rejected" %>
+        <div class="block">ブロックされています</div>
+      <% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "requesting" %>
+        <div class="request-done">リクエスト送信済み</div>
+      <% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "normal" %>
+        <div class="joined">加入済み</div>
+      <% end %>
+    </div>
   </div>
-<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "rejected" %>
-  <div class="block">ブロックされています</div>
-<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "requesting" %>
-  <div class="request-done">リクエスト送信済み</div>
-<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "normal" %>
-  <div class="joined">加入済み</div>
-<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "admin" %>
-  <%= link_to "編集", edit_club_path %>
-<% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "master_admin" %>
-  <%= link_to "編集", edit_club_path(@club.id) %>
-  <%= link_to "加入リクエスト一覧", club_club_menbers_requests_path(club_id: @club.id) %>
-  <%= link_to "大会を作成する", new_event_path %>
-<% end %>
-
-<div class="club-events">
-  <h2>主催大会一覧</h2>
-  <% if @events.present? %>
-    <% @events.each do |event| %>
-      <ul class="club-event">
-        <li>
-          <%= link_to event_path(event.id) do %>
-            <%= event.event %>
+  <table class="club-table">
+    <tr>
+      <th class="club-th">クラブ名</th>
+      <td><%= @club.club_name %></td>
+    </tr>
+    <tr>
+      <th class="club-th">代表者</th>
+      <td><%= @club.club_menbers.find_by(status: "master_admin").user.email %></td>
+    </tr>
+    <tr>
+      <th class="club-th">在籍人数</th>
+      <td>
+        <%= @club.menber_amount %>人
+        <%= link_to "  バドラー内のメンバー一覧", club_club_menbers_path(@club.id), class: "member-link" %>
+      </td>
+    </tr>
+    <tr>
+      <th class="club-th">競技レベル</th>
+      <td><%= @club.club_level %></td>
+    </tr>
+    <tr>
+      <th class="club-th">活動拠点（県）</th>
+      <td><%= @club.practice_area_i18n %></td>
+    </tr>
+    <tr>
+      <th class="club-th">主な練習場所</th>
+      <td><%= @club.area_detail %></td>
+    </tr>
+    <tr>
+      <th class="club-th">MAP</th>
+      <td>
+        <iframe src="http://maps.google.co.jp/maps?q=<%= @club.area_detail %>&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="600" height="450"></iframe>
+      </td>
+    </tr>
+    <tr>
+      <th class="club-th">主催大会</th>
+      <td>
+        <% if @events.present? %>
+          <% @events.each do |event| %>
+            <ul class="club-event">
+              <li>
+                <%= link_to event_path(event.id) do %>
+                  <%= event.event %>
+                <% end %>
+              </li>
+            </ul>
           <% end %>
-        </li>
-      </ul>
-    <% end %>
-  <% else %>
-    主催している大会はありません
-  <% end %>
-</div>
-
+        <% else %>
+          主催している大会はありません
+        <% end %>
+      </td>
+    </tr>
+  </table>

@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>クラブ一覧</h2>
+  <%= link_to "クラブ作成", new_club_path %>
+  <div class="row">
+    <% @clubs.each do |club| %>
+      <div class="col-md-6">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="/assets/shutterstock_247751584.jpg" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body card-content">
+                <h5 class="card-title">クラブ名：
+                  <%= link_to club_path(club.id) do %>
+                    <%= club.club_name %>
+                  <% end %>
+                </h5>
+                <p class="card-text">活動拠点：<%= club.practice_area %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

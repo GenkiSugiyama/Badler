@@ -1,0 +1,11 @@
+<h2>エントリー一覧</h2>
+<ul>
+  <% @categories.each do |category| %>
+    <li><%= category.category_title %></li>
+      <ul>
+        <% category.entry_users.each do |user| %>
+          <li><%= user.user.name %></li>
+        <% end %>
+      </ul>
+  <% end %>
+</ul>

@@ -1,0 +1,114 @@
+<div class="event-show">
+  <div class="event-header clearfix">
+    <h2>大会詳細</h2>
+    <div class="club-member-menu">
+      <% if @event.club.club_admin?(current_user) %>
+        <%= link_to "エントリー一覧", event_entry_users_path(event_id: @event.id) %>
+        <%= link_to "編集する", edit_event_path(@event.id) %>
+        <%= link_to "削除する", event_path(@event.id), method: :delete %>
+      <% else %>
+      <% end %>
+    </div>
+    <div class="entry-menu">
+      <% if @event.can_entry?(@event.id) %>
+        <% if @event.user_entried?(current_user) %>
+          <div class="entried">エントリー済み</div>
+        <% elsif @event.club.blocked_menber?(current_user)%>
+          <div class="blocked">ブロックされています</div>
+        <% else %>
+          <div class="entry">
+            <%= link_to "エントリーする", new_event_entry_user_path(event_id: @event.id) %>
+          </div>
+        <% end%>
+      <% else %>
+        <div class="over-deadline">
+          エントリー終了
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <table class="event-table">
+    <tr>
+      <th class="event-th">大会名</th>
+      <td><%= @event.event %></td>
+    </tr>
+    <tr>
+      <th class="event-th">エントリー期日</th>
+      <td>
+        <% if @event.deadline >= Date.today %>
+          <%= @event.deadline %>
+        <% else %>
+          <%= @event.deadline %><span class="over-deadline">エントリー終了</span>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th class="event-th">開催日</th>
+      <td><%= @event.date %></td>
+    </tr>
+    <tr>
+      <th class="event-th">参加費</th>
+      <td><%= @event.entry_fee %>円</td>
+    </tr>
+    <tr>
+      <th class="event-th">決済方法</th>
+      <td><%= @event.payment_method %></td>
+    </tr>
+    <tr>
+      <th class="event-th">エントリー定員数</th>
+      <td><%= @event.total_capacity %>名</td>
+    </tr>
+    <tr>
+      <th class="event-th">開催場所</th>
+      <td><%= @event.event_place %></td>
+    </tr>
+    <tr>
+      <th class="event-th">住所</th>
+      <td><%= @event.place_address %></td>
+    </tr>
+    <tr>
+      <th class="event-th">MAP</th>
+      <td>
+        <iframe src="http://maps.google.co.jp/maps?q=<%= @event.place_address %>&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="600" height="450"></iframe>
+      </td>
+    </tr>
+    <tr>
+      <th class="event-th">大会要項</th>
+      <td><%= @event.event_detail %></td>
+    </tr>
+    <tr>
+      <th class="event-th">主催クラブ</th>
+      <td>
+        <%= link_to club_path(@event.club_id) do %>
+          <%= @event.club.club_name %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <div class="categories">
+    <div class="categories-header">
+      <h2>開催種目</h2>
+    </div>
+    <div class="hidden_boxes">
+      <% @categories.each.with_index(1) do |category,i| %>
+        <div class="hidden_box">
+          <label for="label<%= i %>"><%= category.category_title %></label>
+          <input type="checkbox" id="label<%= i %>"/>
+          <div class="hidden_show">
+            <!--非表示ここから-->
+            <div class="note">
+              <p>種目詳細：<%= category.category_detail %></p>
+            </div>
+            <% category.category_results.each do |result| %>
+              <div class="note">
+                <p>成績(獲得pt)：<%= result.result %>(<%= result.result_point %>)</p>
+              </div>
+            <% end %>
+            <!--ここまで-->
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

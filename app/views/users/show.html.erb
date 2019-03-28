@@ -1,0 +1,101 @@
+<div class="user-show">
+  <div class="user-header">
+    <h2>ユーザー詳細</h2>
+    <% if @user == current_user %>
+      <div class="user-menu">
+        <%= link_to "ユーザー情報を編集する", edit_user_path %>
+      </div>
+    <% else %>
+      <% if @isRoom == true %>
+        <div class="user-menu">
+          <p><a href="/rooms/<%= @roomId %>">チャットへ</a></p>
+        </div>
+      <% else %>
+        <div class="user-menu">
+          <%= form_for @room do |f| %>
+            <%= fields_for(@entry, method: :post) do |e| %>
+              <%= e.hidden_field :user_id, :value=> @user.id %>
+            <% end %>
+            <%= f.submit "チャットを始める" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <h3>・ユーザー基本情報</h3>
+  <table class="user-table">
+    <tr>
+      <th class="user-th">ユーザー名</th>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th class="user-th">メールアドレス</th>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <th class="user-th">年齢</th>
+      <td><%= @user.birthday %></td>
+    </tr>
+    <tr>
+      <th class="user-th">性別</th>
+      <td><%= @user.sex_i18n %></td>
+    </tr>
+    <tr>
+      <th class="user-th">活動拠点</th>
+      <td><%= @user.address %></td>
+    </tr>
+    <tr>
+      <th class="user-th">総獲得ポイント</th>
+      <td><%= @total_points %>pt</td>
+    </tr>
+    <tr>
+      <th class="user-th">自己紹介</th>
+      <td><%= @user.profile %></td>
+    </tr>
+  </table>
+  <div class="chart-header clearfix">
+    <h3>・ポイント獲得チャート</h3>  <%= link_to "  エントリー一覧へ", user_entries_path(@user.id) %>
+  </div>
+  <div class="wrap">
+    <ul id="tab-menu" class="clearfix">
+      <li><a href="#tab1" class="active">大会ごとの獲得ポイント</a></li>
+      <li><a href="#tab2" class="">総取得ポイント</a></li>
+    </ul>
+
+    <div id="tab-contents" class="clearfix">
+      <div id="tab1" class="tab">
+        <%= line_chart @result_graph.pluck(:date, :result_point), xtitle: "開催日", ytitle: "獲得ポイント", width: "800px", height: "500px", curve: false, class: "chart" %>
+      </div>
+      <div id="tab2" class="tab">
+        <%= line_chart @total_graph, xtitle: "開催日", ytitle: "獲得ポイント", width: "800px", height: "500px", curve: false, class: "chart" %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('#tab-contents .tab[id != "tab1"]').hide();
+
+    $('#tab-menu a').on('click', function() {
+      $("#tab-contents .tab").hide();
+      $("#tab-menu .active").removeClass("active");
+      $(this).addClass("active");
+      $($(this).attr("href")).show();
+      return false;
+    });
+  </script>
+
+  <div class="user-clubs">
+    <h3>運営中・加入中のクラブ</h3>
+    <% @clubs.each do |club| %>
+      <% if club.club_menbers.find_by(user_id: @user.id).status_before_type_cast >= 100 %>
+        <div class="club-field">
+          <%= link_to(club_path(club.id), style: "color:black;") do %>
+            <%= club.club_name %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= link_to "ユーザー一覧に戻る", users_path %>
+</div>

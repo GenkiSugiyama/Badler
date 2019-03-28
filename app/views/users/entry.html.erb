@@ -1,0 +1,18 @@
+<h2>エントリー詳細・結果入力</h2>
+<ul>
+  <li>大会名：<%= @entry_event.event %></li>
+  <li>参加種目：<%= @entry_category.category_title %></li>
+  <li>出場結果：
+    <%= form_with(model: [:user, @entry_user], id: "results") do |f| %>
+      <%= f.collection_select(:category_result_id, @category_results, :id, :result, include_blank: "出場結果を選択してください", class: "entry_result") %>
+      <%= f.submit "結果を記録する" %>
+    <% end %>
+  </li>
+</ul>
+
+<% if @entry_user.category_result_id.present? %>
+  <div id="result-point">
+    取得ポイント：<%= @entry_user.category_result.result_point %>
+  </div>
+<% else %>
+<% end %>

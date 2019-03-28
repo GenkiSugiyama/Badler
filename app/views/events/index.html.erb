@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>大会一覧</h2>
+  <%= link_to "大会作成", new_event_path %>
+  <div class="row">
+    <% @events.each do |event| %>
+      <div class="col-md-6">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="/assets/syoujou.png" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body card-content">
+                <h5 class="card-title">大会名：
+                  <%= link_to event_path(event.id) do %>
+                    <%= event.event %>
+                  <% end %>
+                </h5>
+                <p class="card-text">開催日：　<%= event.date %></p>
+                <p class="card-text">開催地：<%= event.event_place %></p>
+                <% if event.deadline >= Date.today %>
+                  <p class="card-text">エントリー締め切り：<%= event.deadline %></p>
+                <% else %>
+                  <p class="over-deadline">エントリー終了</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

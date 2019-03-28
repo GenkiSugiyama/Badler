@@ -1,0 +1,30 @@
+<%= form_for(club) do |f|%>
+  <div class="form-group row">
+    <label for="name" class="col-sm-4 d-flex align-items-center">団体名</label>
+    <%= f.text_field :club_name, id: "name", class: "col-sm-8 form-control" %>
+  </div>
+  <div class="form-group row">
+    <label for="profile" class="col-sm-4 d-flex align-items-center">クラブ紹介文</label>
+    <%= f.text_area :club_profile, id: "profile", class: "col-sm-8 form-control" %>
+  </div>
+  <!-- 県はenumから選択させる -->
+  <div class="form-group row">
+    <label for="area" class="col-sm-4 d-flex align-items-center">活動拠点（県）</label>
+    <%= f.select :practice_area, Club.practice_areas.keys, {prompt: "選択してください"}, id: "area", class: "col-sm-8 form-control" %>
+  </div>
+  <div class="form-group row">
+    <label for="detail" class="col-sm-4 d-flex align-items-center">活動拠点（市以下）</label>
+    <%= f.text_field :area_detail, id: "detail", class: "col-sm-8 form-control" %>
+  </div>
+  <div class="form-group row">
+    <label for="amount" class="col-sm-4 d-flex align-items-center">在籍人数</label>
+    <%= f.number_field :menber_amount, min:1, id: "amount", class: "col-sm-8 form-control" %>
+  </div>
+  <div class="form-group row">
+    <label for="level" class="col-sm-4 d-flex align-items-center">競技レベル</label>
+    <%= f.text_field :club_level, id: "level", class: "col-sm-8 form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "確認して登録する", class: "btn btn-outline-warning col-sm-2 offset-sm-5" %>
+  </div>
+<% end %>

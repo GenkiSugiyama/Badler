@@ -1,0 +1,236 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main-visual {
+  width: 100%;
+  height: 600px;
+  background-image: url("/assets/frame-harirak-602126-unsplash.jpg");
+  background-size: cover;
+  background-position: top;
+}
+
+.main-title {
+background-color: rgba( 0, 0, 0, 0.4);
+height: 600px;
+text-align: center;
+padding-top: 240px;
+}
+
+.main-title .title {
+  color: white;
+  font-size: 85px;
+  font-bold: 600px;
+}
+
+.main-title .text {
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.3em
+}
+
+
+.select-boxes {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 570px;
+  background-color: #f9f9f9;
+}
+
+.select-boxes h3{
+  color: orange;
+  text-align: center;
+}
+
+.box1 {
+  width: 30%;
+  border-right: solid 0.5px #808080;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.content-boxes {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.content-boxes a {
+  text-decoration:none;
+}
+
+.content-box {
+  width: 90%;
+  margin: 0 auto 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: thick solid orange;
+  border-radius: 10px;
+  color: #808080;
+  background-color: white;
+}
+
+.content-box:hover {
+  background-color: rgba( 0, 0, 0, 0.1);
+  text-decoration:none;
+}
+
+.content-box span {
+  color: orange;
+}
+
+.club-link {
+  padding: 10px 10px 10px;
+  border: solid 1px orange;
+  border-radius: 10px;
+  color: orange;
+  background-color: white;
+}
+
+.club-link:hover {
+  background-color: orange;
+  color: white;
+}
+
+.box2 {
+  width: 40%;
+  border-right: 1px solid #808080;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.content-box2 {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  line-height: 1.5;
+  color: #808080;
+  background-color: white;
+  padding: 15px 15px;
+  border: thick solid orange;
+  border-radius: 10px;
+}
+
+.box2 ul {
+  list-style: none;
+  margin-top: 150px;
+}
+
+.box2 li {
+  display: inline-block;
+}
+
+.box2 .signup {
+  padding: 10px 10px 10px;
+  border: solid 1px orange;
+  border-radius: 10px;
+  color: orange;
+  background-color: white;
+}
+
+.box2 .signup:hover {
+  background-color: orange;
+  color: white;
+}
+
+.box2 .login {
+  padding: 10px 10px 10px;
+  border: solid 1px #808080;
+  border-radius: 10px;
+  color: #808080;
+  background-color: white;
+}
+
+.box2 .login:hover {
+  background-color: #808080;
+  color: white;
+}
+
+.box2 .space {
+  margin-top: 190px;
+}
+
+.box2 .mypage {
+  padding: 10px 10px 10px;
+  border: solid 1px orange;
+  border-radius: 10px;
+  color: orange;
+  background-color: white;
+}
+
+.box2 .mypage:hover {
+  background-color: orange;
+  color: white;
+}
+
+.box3 {
+  width: 30%;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.content-boxes3 {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.content-boxes3 a {
+  text-decoration:none;
+}
+
+.content-box3 {
+  width: 90%;
+  margin: 0 auto 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: thick solid orange;
+  border-radius: 10px;
+  color: #808080;
+  background-color: white;
+}
+
+.content-box3 .event {
+  display: inline;
+}
+
+.content-box3 h6 {
+  margin-top: 8px;
+}
+
+.content-box3:hover {
+  background-color: rgba( 0, 0, 0, 0.1);
+  text-decoration:none;
+}
+
+.content-box3 span {
+  color: orange;
+}
+
+.event-link {
+  padding: 10px 10px 10px;
+  border: solid 1px orange;
+  border-radius: 10px;
+  color: orange;
+  background-color: white;
+}
+
+.event-link:hover {
+  background-color: orange;
+  color: white;
+}
+
+.ranking {
+  table-layout: fixed;
+  text-align: center;
+}
+
+
+
+
+
+
+

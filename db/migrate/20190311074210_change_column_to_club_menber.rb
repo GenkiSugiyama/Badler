@@ -6,4 +6,8 @@ class ChangeColumnToClubMenber < ActiveRecord::Migration[5.2]
   # def down
   #   change_column_default :club_menbers, :status, 0
   # end
+
+
+
+
 end

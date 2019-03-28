@@ -1,11 +1,16 @@
-<div class='nested-fields'>
-  <div class="field">
-    <%= f.label :成績 %>
-    <%= f.text_field :result %>
+<div class="col-sm-12">
+  <div class='nested-fields'>
+    <div class="category-field form-row">
+        <label for="category">種目pt</label>
+      <div class="field form-inline col-sm-5">
+        <%= f.label :成績 %>
+        <%= f.text_field :result, class: "form-control" %>
+      </div>
+      <div class="field form-inline col-sm-5.5">
+        <%= f.label :ポイント %>
+        <%= f.number_field :result_point , class: "form-control"%>
+      </div>
+      <%= link_to_remove_association "削除", f, class: "col-sm-1.5 btn btn-outline-danger delet-category col-sm-1" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :ポイント %>
-    <%= f.number_field :result_point %>
-  </div>
-  <%= link_to_remove_association "成績削除", f %>
 </div>

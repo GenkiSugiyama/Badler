@@ -70,6 +70,11 @@ span {
   line-height: 60px;
   float: left;
   margin-left: 20px;
+  font-weight: bold;
+}
+
+.user-menu:hover {
+  background-color: orange;
 }
 
 #tab-menu li {

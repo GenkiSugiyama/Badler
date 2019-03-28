@@ -1,15 +1,17 @@
 <div class='nested-fields'>
-  <div class="field">
-    <%= f.label :種目名 %>
-    <%= f.text_field :category_title %>
-  </div>
-  <div class="field">
-    <%= f.label :種目詳細 %>
-    <%= f.text_area :category_detail %>
+  <div class="category-field form-row">
+    <div class="field col-sm-5 form-inline">
+      <%= f.label :種目 %>
+      <%= f.text_field :category_title, class: "form-control" %>
+    </div>
+    <div class="field col-sm-5.5 form-inline">
+      <%= f.label :詳細 %>
+      <%= f.text_field :category_detail, class: "form-control" %>
+    </div>
+    <%= link_to_remove_association "種目削除", f, class: "col-sm-1.5 btn btn-danger delet-category" %>
   </div>
 
-  <div class="nested">
-    <label for="category">種目ポイント</label>
+  <div class="nested result form-group row">
     <%= f.fields_for :category_results do |result| %>
       <%= render 'category_result_fields', f: result %>
     <% end %>
@@ -17,5 +19,4 @@
       <%= link_to_add_association 'ポイント入力', f, :category_results %>
     </div>
   </div>
-  <%= link_to_remove_association "種目削除", f %>
 </div>

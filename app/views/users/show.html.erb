@@ -1,23 +1,24 @@
 <div class="user-show">
   <div class="user-header">
     <h2>ユーザー詳細</h2>
-    <% if current_user == @user %>
+    <% if @user == current_user %>
       <div class="user-menu">
         <%= link_to "ユーザー情報を編集する", edit_user_path %>
       </div>
     <% else %>
-    <% end %>
-    <% if @user.id == current_user.id %>
-    <% else %>
       <% if @isRoom == true %>
-        <p><a href="/rooms/<%= @roomId %>">チャットへ</a></p>
+        <div class="user-menu">
+          <p><a href="/rooms/<%= @roomId %>">チャットへ</a></p>
+        </div>
       <% else %>
-        <%= form_for @room do |f| %>
-          <%= fields_for(@entry, method: :post) do |e| %>
-            <%= e.hidden_field :user_id, :value=> @user.id %>
+        <div class="user-menu">
+          <%= form_for @room do |f| %>
+            <%= fields_for(@entry, method: :post) do |e| %>
+              <%= e.hidden_field :user_id, :value=> @user.id %>
+            <% end %>
+            <%= f.submit "チャットを始める" %>
           <% end %>
-          <%= f.submit "チャットを始める" %>
-        <% end %>
+        </div>
       <% end %>
     <% end %>
   </div>
@@ -95,26 +96,6 @@
       <% end %>
     <% end %>
   </div>
-
-  <div class="user-entry">
-    <h2>大会情報</h2>
-    <h3><%= link_to "エントリー一覧", user_entries_path(@user.id) %> </h3>
-  </div>
-
-
-  <% if @user.id == current_user.id %>
-  <% else %>
-    <% if @isRoom == true %>
-      <p><a href="/rooms/<%= @roomId %>">チャットへ</a></p>
-    <% else %>
-      <%= form_for @room do |f| %>
-        <%= fields_for(@entry, method: :post) do |e| %>
-          <%= e.hidden_field :user_id, :value=> @user.id %>
-        <% end %>
-        <%= f.submit "チャットを始める" %>
-      <% end %>
-    <% end %>
-  <% end %>
 
   <%= link_to "ユーザー一覧に戻る", users_path %>
 </div>

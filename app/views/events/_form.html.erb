@@ -1,50 +1,52 @@
 <%= form_with(model: event, local: true) do |f| %>
-  <div class="event-form">
-    <label for="event">大会名</label>
-    <%= f.text_field :event, id: "event" %>
+  <div class="form-group row">
+    <label for="event" class="col-sm-3">大会名</label>
+    <%= f.text_field :event, id: "event", class: "col-sm-9 form-control" %>
   </div>
-  <div class="event-form">
-    <label for="date">開催日</label>
-    <%= f.date_field :date, id: "date" %>
+  <div class="form-group row">
+    <label for="date" class="col-sm-3">開催日</label>
+    <%= f.date_field :date, id: "date", class: "col-sm-5 form-control" %>
   </div>
-  <div class="event-form">
-    <label for="">エントリー期日</label>
-    <%= f.date_field :deadline, id: "deadline" %>
+  <div class="form-group row">
+    <label for="deadline" class="col-sm-3">エントリー期日</label>
+    <%= f.date_field :deadline, id: "deadline", class: "col-sm-5 form-control" %>
   </div>
-  <div class="event-form">
-    <label for="place">会場</label>
-    <%= f.text_field :event_place, id: "place" %>
+  <div class="form-group row">
+    <label for="place" class="col-sm-3">会場</label>
+    <%= f.text_field :event_place, id: "place", class: "col-sm-6 form-control" %>
   </div>
-  <div class="event-form">
-    <label for="address">住所</label>
-    <%= f.text_field :place_address, id: "address" %>
+  <div class="form-group row">
+    <label for="address" class="col-sm-3">住所</label>
+    <%= f.text_field :place_address, id: "address", class: "col-sm-9 form-control" %>
   </div>
-  <div class="event-form">
-    <label for="fee">一人当たり参加費</label>
-    <%= f.number_field :entry_fee, id: "fee" %>円
+  <div class="form-group row">
+    <label for="fee" class="col-sm-3">一人当たり参加費</label>
+    <%= f.number_field :entry_fee, id: "fee", class: "col-sm-4 form-control" %>円
   </div>
-  <div class="event-form">
-    <label for="capacity">エントリー定員数</label>
-    <%= f.number_field :total_capacity, id: "capacity" %>名
+  <div class="form-group row">
+    <label for="capacity" class="col-sm-3">エントリー定員数</label>
+    <%= f.number_field :total_capacity, id: "capacity", class: "col-sm-5 form-control" %>名
   </div>
-  <div class="event-form">
-    <label for="payment">決済方法</label>
-    <%= f.select :payment_method, id: "payment" %>
+  <div class="form-group row">
+    <label for="payment" class="col-sm-3">決済方法</label>
+    <%= f.select :payment_method, id: "payment", class: "col-sm-3 form-control" %>
   </div>
-  <div class="event-form">
-    <label for="detail">大会概要</label>
-    <%= f.text_area :event_detail, id: "detail" %>
+  <div class="form-group row">
+    <label for="detail" class="col-sm-3">大会概要</label>
+    <%= f.text_area :event_detail, id: "detail", class: "col-sm-9 form-control" %>
   </div>
-  <div class="nested">
-    <label for="category">開催種目</label>
-    <%= f.fields_for :event_categories do |category| %>
-      <%= render 'event_category_fields', f: category %>
-    <% end %>
-    <div class="links">
-      <%= link_to_add_association '種目追加', f, :event_categories %>
+  <div class="nested form-group row">
+    <label for="category" class="col-sm-3">開催種目</label>
+    <div class="col-sm-9 ml-auto">
+      <%= f.fields_for :event_categories do |category| %>
+        <%= render 'event_category_fields', f: category %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association '種目追加', f, :event_categories %>
+      </div>
     </div>
   </div>
-  <div class="event-form">
-    <%= f.submit "大会作成" %>
+  <div class="event-form mx-auto">
+    <%= f.submit "確認して登録", class: "btn btn-outline-warning col-sm-2 offset-sm-5" %>
   </div>
 <% end %>

@@ -10,6 +10,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :event_place
       t.string :place_address
       t.integer :payment_method
+      t.text :event_detail
       t.timestamps
     end
   end

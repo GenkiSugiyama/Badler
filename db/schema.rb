@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 2019_03_12_092424) do
     t.string "event_place"
     t.string "place_address"
     t.integer "payment_method"
+    t.text "event_detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "event_detail"
   end
 
   create_table "messages", force: :cascade do |t|

@@ -6,7 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -60,7 +60,7 @@
         <p><%= flash[:notice] %></p>
       </div>
     <% elsif flash[:alert] %>
-      <div id="alert"></div>
+      <div id="alert">
         <p><%= flash[:alert] %></p>
       </div>
     <% end %>

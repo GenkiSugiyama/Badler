@@ -13,7 +13,7 @@
     <%= f.select :practice_area, Club.practice_areas.keys, {prompt: "選択してください"}, id: "area", class: "col-sm-8 form-control" %>
   </div>
   <div class="form-group row">
-    <label for="detail" class="col-sm-4 d-flex align-items-center">活動拠点（市以下）</label>
+    <label for="detail" class="col-sm-4 d-flex align-items-center">活動拠点（住所や施設名）</label>
     <%= f.text_field :area_detail, id: "detail", class: "col-sm-8 form-control" %>
   </div>
   <div class="form-group row">

@@ -10,7 +10,7 @@ class ClubsController < ApplicationController
     # buildでclub_menberのレコードに外部キーであるclub_idを作成
     club_menber = club.club_menbers.build
     club_menber.user_id = current_user.id
-    club_menber.status = "master_admin"
+    club_menber.master_admin!
     if club.save
       flash[:notice] = "新規クラブを作成しました！"
       redirect_to club_path(club.id)
@@ -79,9 +79,9 @@ class ClubsController < ApplicationController
   end
 
   def admin?
-    if current_user.club_menbers.find(params[:id]).status == "master_admin"
-    else
+    if current_user.club_menbers.empty? || current_user.club_menbers.find(params[:id]).status != "master_admin"
       redirect_to club_path(params[:id])
+    else
     end
   end
 end

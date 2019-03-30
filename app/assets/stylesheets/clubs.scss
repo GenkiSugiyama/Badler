@@ -75,6 +75,20 @@ club_card {
   color: white;
 }
 
+.chat-button input {
+  appearance: none;
+  border: none;
+  margin-bottom: 0;
+  font-weight: bold;
+  border-bottom: 1px solid orange;
+}
+
+.chat-button input:hover {
+  cursor: select;
+  background-color: orange;
+  color: white;
+}
+
 .request-button {
   float: right;
   display: inline-block;

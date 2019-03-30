@@ -9,22 +9,25 @@
       <td></td>
     </tr>
     <% @club_menbers.each do |menber| %>
-      <tr>
-        <td>
-          <%= link_to user_path(id: menber.user_id) do %>
-            <%= menber.user.email %>
-          <% end %>
-        </td>
-        <td>
-          <%= menber.status_i18n %>
-        </td>
-        <td>
-          <% if current_user.club_menbers.find_by(club_id: params[:club_id]).status_before_type_cast == 1000 %>
-            <%= link_to "ユーザー権限を変更する", edit_club_club_menber_path(id: menber.id) %>
-          <% else %>
-          <% end %>
-        </td>
-      </tr>
+      <% if menber.status_before_type_cast <= 10 %>
+      <% else %>
+        <tr>
+          <td>
+            <%= link_to user_path(id: menber.user_id) do %>
+              <%= menber.user.email %>
+            <% end %>
+          </td>
+          <td>
+            <%= menber.status_i18n %>
+          </td>
+          <td>
+            <% if current_user.club_menbers.find_by(club_id: params[:club_id]).status_before_type_cast == 1000 %>
+              <%= link_to "ユーザー権限を変更する", edit_club_club_menber_path(id: menber.id) %>
+            <% else %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </table>
 </div>

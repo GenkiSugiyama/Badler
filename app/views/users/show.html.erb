@@ -86,15 +86,24 @@
 
   <div class="user-clubs">
     <h3>運営中・加入中のクラブ</h3>
-    <% @clubs.each do |club| %>
-      <% if club.club_menbers.find_by(user_id: @user.id).status_before_type_cast >= 100 %>
-        <div class="club-field">
-          <%= link_to(club_path(club.id), style: "color:black;") do %>
-            <%= club.club_name %>
+      <ul class="horizontal-list">
+        <% @clubs.each do |club| %>
+          <% if club.club_menbers.find_by(user_id: @user.id).status == "master_admin" %>
+            <li class="item">
+                <%= link_to(club_path(club.id), style: "color:black;") do %>
+                  <%= club.club_name %>
+                <% end %>
+                <p>運営中</p>
+          <% elsif club.club_menbers.find_by(user_id: @user.id).status_before_type_cast >= 100 %>
+            <li class="item">
+                <%= link_to(club_path(club.id), style: "color:black;") do %>
+                  <%= club.club_name %>
+                <% end %>
+            </li>
+            </li>
           <% end %>
-        </div>
-      <% end %>
-    <% end %>
+        <% end %>
+      </ul>
   </div>
 
   <%= link_to "ユーザー一覧に戻る", users_path %>

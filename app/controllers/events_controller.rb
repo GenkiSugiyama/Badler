@@ -19,6 +19,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @club = @event.club
     @categories = @event.event_categories
   end
 

@@ -2,12 +2,15 @@
   <div class="club-header clearfix">
     <h2>クラブ詳細</h2>
       <div class="admin-menu">
-        <% if current_user.club_menbers.find_by(club_id: @club.id).status == "admin" %>
-          <%= link_to "編集", edit_club_path %>
-        <% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "master_admin" %>
-          <%= link_to "編集", edit_club_path(@club.id) %>
-          <%= link_to "加入リクエスト一覧", club_club_menbers_requests_path(club_id: @club.id) %>
-          <%= link_to "大会を作成する", new_event_path %>
+        <% if current_user.club_menbers.find_by(club_id: @club.id).present? %>
+          <% if current_user.club_menbers.find_by(club_id: @club.id).status == "admin" %>
+            <%= link_to "編集", edit_club_path %>
+          <% elsif current_user.club_menbers.find_by(club_id: @club.id).status == "master_admin" %>
+            <%= link_to "編集", edit_club_path(@club.id) %>
+            <%= link_to "加入リクエスト一覧", club_club_menbers_requests_path(club_id: @club.id) %>
+            <%= link_to "大会を作成する", new_event_path %>
+          <% end %>
+        <% else %>
         <% end %>
       </div>
       <% if @admin_user.id == current_user.id %>
@@ -20,7 +23,7 @@
           <div class="chat-button">
             <%= form_for @room do |f| %>
               <%= fields_for(@entry, method: :post) do |e| %>
-                <%= e.hidden_field :user_id, :value=> @user.id %>
+                <%= e.hidden_field :user_id, :value=> @admin_user.id %>
               <% end %>
               <%= f.submit "代表者へチャットを送る" %>
             <% end %>

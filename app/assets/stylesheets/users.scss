@@ -35,13 +35,12 @@ span {
   max-width: 900px;
   margin: 20px auto;
 }
- 
+
 .clearfix:after{
   content:"";
   clear: both;
   display: block;
 }
- 
 
 
 .user-show{
@@ -82,7 +81,7 @@ span {
   list-style-type: none;
   width: 50%;
 }
- 
+
 #tab-menu a {
   color: #fff;
   text-decoration: none;
@@ -93,19 +92,19 @@ span {
   border: 1px solid #000;
   border-bottom: 1px solid #000;
 }
- 
+
 #tab-menu .active {
   background: #fff;
   color: orange;
 }
- 
+
 #tab-contents .tab {
   padding: 30px;
   background: #fff;
   border: 1px solid #000;
   border-top: none;
 }
- 
+
 #tab-contents p{
   color:#000;
   line-height: 2.5;
@@ -177,6 +176,32 @@ span {
   clear: both;
 }
 
+.horizontal-list {
+  width: 80%;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: scroll;
+  display: flex;
+
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin: 16px;
+  text-align: center;
+  background-color: orange;
+  border-radius: 50%;
+}
+
+.item p {
+  color: white;
+  font-weight: bold;
+}
+
 .entry-index {
   width: 80%;
   margin: 20px auto;
@@ -195,7 +220,7 @@ span {
   vertical-align: top;
   color: #fff;
   background-color: #555;
-  border-left: 5px solid #ff6633; 
+  border-left: 5px solid #ff6633;
   border-top: 1px solid #fff;
 }
 

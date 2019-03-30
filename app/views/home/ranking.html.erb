@@ -1,4 +1,4 @@
-<div class="container-fluid" style="color:#808080;">
+<div class="container" style="color:#808080;">
   
 </style>
     <h2>バドラー世界ランキング　TOP10</h2><%= Date.today %> 現在
@@ -13,9 +13,23 @@
         <% @ranking.each.with_index(1) do |rank,i | %>
           <tbody>
             <tr>
-              <td>
-                第<%= i %>位
-              </td>
+              <% if i == 1 %>
+                <td id="gold">
+                  第<%= i %>位
+                </td>
+              <% elsif i == 2 %>
+                <td id="silver">
+                  第<%= i %>位
+                </td>
+              <% elsif i == 3 %>
+                <td id="blue">
+                  第<%= i %>位
+                </td>
+              <% else %>
+                <td>
+                  第<%= i %>位
+                </td>
+              <% end %>
               <td>
                 <%= link_to user_path(rank[:id]) do %>
                   <%= rank[:name] %>

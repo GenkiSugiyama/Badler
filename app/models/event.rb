@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   end
 
   def can_entry?(id)
-    Date.today < Event.find(id).deadline
+    Date.today <= Event.find(id).deadline
   end
 
 end

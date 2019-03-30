@@ -1,30 +1,34 @@
-<h2>プロフィール編集</h2>
-<%= form_for(@user) do |f| %>
-  <div class="edit-user">
-    <label for="name">ユーザー名</label>
-    <%= f.text_field :name, id: "name" %>
+<div class="container">
+  <div class="user-header">
+    <h2>プロフィール編集</h2>
   </div>
-  <div class="edit-user">
-    <label for="email">メールアドレス</label>
-    <%= f.text_field :email, id: "email" %>
-  </div>
-  <div class="edit-user">
-    <label for="birthday">生年月日</label>
-    <%= f.date_field :birthday, id: "birthday" %>
-  </div>
-  <div class="edit-user">
-    <label for="sex">性別</label>
-    <%= f.select :sex, User.sexes.keys.to_a, {} %>
-  </div>
-  <div class="edit-user">
-    <label for="address">住所</label>
-    <%= f.text_field :address, id: "address" %>
-  </div>
-  <div class="edit-user">
-    <label for="profile">自己紹介</label>
-    <%= f.text_area :profile, id: "profile" %>
-  </div>
-  <div class="edit-user">
-    <%= f.submit "更新する" %>
-  </div>
-<% end %>
+  <%= form_for(@user) do |f| %>
+    <div class="form-group row">
+      <label for="name" class="col-sm-3">ユーザー名</label>
+      <%= f.text_field :name, id: "name", class: "col-sm-5 form-control"  %>
+    </div>
+    <div class="form-group row">
+      <label for="email" class="col-sm-3">メールアドレス</label>
+      <%= f.text_field :email, id: "email", class: "col-sm-5 form-control" %>
+    </div>
+    <div class="form-group row">
+      <label for="birthday" class="col-sm-3">生年月日</label>
+      <%= f.date_field :birthday, id: "birthday", class: "col-sm-5 form-control" %>
+    </div>
+    <div class="form-group row">
+      <label for="sex" class="col-sm-3">性別</label>
+      <%= f.select :sex, User.sexes.keys.to_a, {}, class: "col-sm-5 form-control" %>
+    </div>
+    <div class="form-group row">
+      <label for="address" class="col-sm-3">住所</label>
+      <%= f.text_field :address, id: "address", class: "col-sm-5 form-control" %>
+    </div>
+    <div class="form-group row">
+      <label for="profile" class="col-sm-3">自己紹介</label>
+      <%= f.text_area :profile, id: "profile", class: "col-sm-5 form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "更新する", class: "btn btn-outline-warning col-sm-2 offset-sm-5" %>
+    </div>
+  <% end %>
+</div>

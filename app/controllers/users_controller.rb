@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user1, only: [:edit, :update]
+  before_action :correct_user2, only: [:entry, :entry_update, :entry_destroy]
   def index
     @users = User.all
   end
@@ -102,6 +104,20 @@ class UsersController < ApplicationController
 
   def result_params
     params.require(:entry_user).permit(:category_result_id)
+  end
+
+  def correct_user1
+    user = User.find(params[:id])
+    if current_user != user
+      redirect_to user_path(current_user)
+    end
+  end
+
+  def correct_user2
+    user = User.find(params[:user_id])
+    if current_user != user
+      redirect_to user_path(current_user)
+    end
   end
 
 end

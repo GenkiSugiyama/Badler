@@ -1,6 +1,7 @@
 class ClubMenbersController < ApplicationController
   before_action :authenticate_user!
-  before_action :member?, only: [:index]
+  before_action :master_admin?, only: [:edit, :update]
+  before_action :admin?, only: [:requests, :approve, :destroy]
   def create
     @club = Club.find(params[:club_id])
     club_menber = ClubMenber.new
@@ -58,10 +59,14 @@ class ClubMenbersController < ApplicationController
     params.require(:club_menber).permit(:status)
   end
 
-  def member?
-    if current_user.club_menbers.find_by(club_id: params[:club_id]).present?
-    else
-      flash[:alert] = "クラブへの加入が必要です"
+  def master_admin?
+    if current_user.club_menbers.find_by(params[:club_id]).empty? || current_user.club_menbers.find_by(params[:club_id]).status.before_type_cast != 1000
+      redirect_to club_path(params[:club_id])
+    end
+  end
+
+  def admin?
+    if current_user.club_menbers.find_by(params[:club_id]).empty? || current_user.club_menbers.find_by(params[:club_id]).status.before_type_cast < 200
       redirect_to club_path(params[:club_id])
     end
   end

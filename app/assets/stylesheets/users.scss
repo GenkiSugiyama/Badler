@@ -76,6 +76,23 @@ span {
   background-color: orange;
 }
 
+.new_room {
+  height: 60px;
+}
+
+.user-menu input {
+  appearance: none;
+  border: none;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.user-menu input:hover {
+  cursor: select;
+  background-color: orange;
+  color: white;
+}
+
 #tab-menu li {
   float: left;
   list-style-type: none;

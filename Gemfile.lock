@@ -90,6 +90,9 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.8.0)
+      devise (>= 4.6)
+    devise-i18n-views (0.3.7)
     enum_help (0.0.17)
       activesupport (>= 3.0.0)
     erubi (1.8.0)
@@ -252,6 +255,8 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.2)
   devise
+  devise-i18n
+  devise-i18n-views
   enum_help
   jbuilder (~> 2.5)
   jquery-rails

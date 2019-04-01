@@ -1,25 +1,81 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-video {
-  position: relative;
-  z-index: -100;
-}
-
 .box {
+  margin: 0;
+  padding: 0 ;
+  position: relative;
+  height: 800px;
+  background-image: image-url("NIS19311035.jpg");
+  background-size: cover;
 }
 .login_form{
-  width:300px;
-  margin:-700px auto 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 40px;
   background-color: rgba( 0, 0, 0, 0.6);
-  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
   border: solid 1px orange;
 }
 
-.login_form{
-  padding: 20px;
-  color:orange;
+.login_form h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
   text-align: center;
+}
+
+.login_form .field {
+  position: relative;
+}
+
+.login_form .field input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
+}
+
+.login_form .field label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 1px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.login_form .field input:focus ~ label,
+ {
+  top: -18px;
+  left: 0;
+  color: orange;
+  font-size: 12px;
+}
+
+.login_form input[type="submit"] {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #ffb366;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .login-button {

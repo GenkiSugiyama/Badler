@@ -13,9 +13,11 @@
   <body class="main-container">
     <header id="global-header">
       <div id="global-header_inner">
-        <div id="global-header_logo">
-          <%= link_to "Top", root_path %>
-        </div>
+        <%= link_to(root_path) do %>
+          <div id="global-header_logo">
+            <img src="/assets/linkedin_banner_image_1.png" height= "60px"></a>
+          </div>
+        <% end %>
         <nav id="global-header_menu">
           <ul id="global-header_items">
             <li id="global-header_item">

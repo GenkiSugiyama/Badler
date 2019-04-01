@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.search {
+  margin-left: 15px;
+}
+
+.search input[type="submit"] {
+  margin-left: 10px;
+}
+
 club_card {
   background-image: url("/assets/shutterstock_247751584.jpg");
   background-color: rbga(0,0,0,0.2);

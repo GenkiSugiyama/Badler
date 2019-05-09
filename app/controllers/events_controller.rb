@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
+  before_action :club_admin?, only: [:edit, :update, :destroy]
   def new
     @event = Event.new
     @event_category = @event.event_categories.build
@@ -50,5 +51,13 @@ class EventsController < ApplicationController
   private
   def event_params
     params.require(:event).permit(:event, :deadline, :date, :entry_fee, :total_capacity, :event_place, :place_address, :payment_method, :event_detail, event_categories_attributes: [:id, :category_title, :category_detail, :_destroy, category_results_attributes: [:id, :result, :result_point, :_destroy]])
+  end
+
+  def club_admin?
+    event = Event.find(params[:id])
+    user = event.club.club_menbers.find_by(status: "master_admin").user
+    unless current_user == user then
+      redirect_to event_path(params[:id])
+    end
   end
 end

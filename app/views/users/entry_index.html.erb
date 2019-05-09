@@ -6,7 +6,10 @@
       <th class="entry-th">開催日</th>
       <th class="entry-th">出場種目</th>
       <th class="entry-th">結果(獲得ポイント)</th>
-      <th class="entry-th"></th>
+      <% if current_user == @user %>
+        <th class="entry-th"></th>
+      <% else %>
+      <% end %>
     </tr>
     <% @entries.each do |entry| %>
       <tr>
@@ -21,20 +24,29 @@
         <% if entry.can_result?(entry.id) && entry.category_result_id.nil? %>
           <td>未入力</td>
           <td>未入力</td>
-          <td><%= link_to "結果入力", user_entry_path(@user.id, entry.id) %></td>
+          <% if current_user == @user %>
+            <td><%= link_to "結果入力", user_entry_path(@user.id, entry.id) %></td>
+          <% else %>
+          <% end %>
         <% elsif entry.category_result_id.nil? %>
           <td>未開催</td>
           <td>未開催</td>
-          <td></td>
+          <% if current_user == @user %>
+            <td></td>
+          <% else %>
+          <% end %>
         <% elsif %>
           <td><%= entry.event_category.category_title %></td>
           <td>
             <%= entry.category_result.result %>
             (<%= entry.category_result.result_point %>pt)
           </td>
-          <td>
-            <%= link_to "結果の編集", user_entry_path(@user.id, entry.id) %>
-          </td>
+          <% if current_user == @user %>
+            <td>
+              <%= link_to "結果の編集", user_entry_path(@user.id, entry.id) %>
+            </td>
+          <% else %>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

@@ -1,4 +1,6 @@
 class EntryUsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :club_admin?, only: [:index]
   def new
     @entry_user = EntryUser.new
     @event_categories = EventCategory.where(event_id: params[:event_id])
@@ -11,10 +13,6 @@ class EntryUsersController < ApplicationController
       flash[:notice] = "エントリーが完了しました"
       redirect_to event_path(params[:event_id])
     end
-  end
-
-  def show
-    
   end
 
   def index
@@ -30,6 +28,14 @@ class EntryUsersController < ApplicationController
   private
   def entry
     params.require(:entry_user).permit(:event_category_id)
+  end
+
+  def club_admin?
+    event = Event.find(params[:event_id])
+    user = event.club.club_menbers.find_by(status: "master_admin").user
+    unless current_user == user then
+      redirect_to event_path(params[:event_id])
+    end
   end
 
 end

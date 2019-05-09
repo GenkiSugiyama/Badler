@@ -1,32 +1,22 @@
 
 <div class="box">
-  <%= video_tag("/assets/videos/testmovie.mp4", autoplay: true, loop: true, muted: true, style: "width:100%;") %>
   <div class="login_form">
-  <h2>Log in</h2>
-
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
+    <h2>Log in</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <%= f.email_field :email, autocomplete: "email" %>
+        <%= f.label :email %>
       </div>
+
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.label :password %>
+      </div>
+
+      <%= f.submit "Log in" %>
+
     <% end %>
 
-    <div class="actions">
-      <%= f.submit "Log in" %>
-    </div>
-  <% end %>
-
-  <%= render "users/shared/links" %>
+    <%= render "users/shared/links" %>
   </div>
 </div>

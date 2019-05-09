@@ -74,13 +74,15 @@ class UsersController < ApplicationController
     @entry_category = EntryUser.find(params[:id]).event_category
     @entry_user = EntryUser.find(params[:id])
     @category_results = EntryUser.find(params[:id]).event_category.category_results
+    @user = User.find(params[:user_id])
   end
 
   def entry_update
     entry_user = EntryUser.find(params[:id])
+    entry_user.user_id = current_user.id
     if entry_user.update(result_params)
       flash[:notice] = "出場結果を入力しました"
-      redirect_to user_entries_path
+      redirect_to user_entries_path(entry_user.user_id)
     else
       render 'entry'
     end
@@ -103,7 +105,7 @@ class UsersController < ApplicationController
   end
 
   def result_params
-    params.require(:entry_user).permit(:category_result_id)
+    params.require(:entry_user).permit(:category_result_id, :user_id)
   end
 
   def correct_user1

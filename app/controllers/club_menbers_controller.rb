@@ -60,13 +60,13 @@ class ClubMenbersController < ApplicationController
   end
 
   def master_admin?
-    if current_user.club_menbers.find_by(params[:club_id]).empty? || current_user.club_menbers.find_by(params[:club_id]).status.before_type_cast != 1000
+    if current_user.club_menbers.find_by(params[:club_id]).blank? || current_user.club_menbers.find_by(club_id: params[:club_id]).status_before_type_cast != 1000
       redirect_to club_path(params[:club_id])
     end
   end
 
   def admin?
-    if current_user.club_menbers.find_by(params[:club_id]).empty? || current_user.club_menbers.find_by(params[:club_id]).status.before_type_cast < 200
+    if current_user.club_menbers.find_by(params[:club_id]).blank? || current_user.club_menbers.find_by(params[:club_id]).status_before_type_cast < 200
       redirect_to club_path(params[:club_id])
     end
   end

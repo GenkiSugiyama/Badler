@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
 
   def ranking
-    ranks = CategoryResult.joins(:entry_users).group(:user_id).sum(:result_point).sort_by { |_, b| b }.reverse.limit(10)
+    ranks = CategoryResult.joins(:entry_users).group(:user_id).sum(:result_point).sort_by { |_, b| b }.reverse.first(10)
     @ranking = [];
     count_h = 0
 

@@ -13,7 +13,7 @@
       <% end %>
     </div>
     <div class="entry-menu">
-      <% if @event.can_entry?(@event.id) %>
+      # <% if @event.can_entry?(@event.id) %>
         <% if @event.user_entried?(current_user) %>
           <div class="entried">エントリー済み</div>
         <% elsif current_user.club_menbers.find_by(club_id: @club.id).present? && @event.club.blocked_menber?(current_user)%>
@@ -23,11 +23,11 @@
             <%= link_to "エントリーする", new_event_entry_user_path(event_id: @event.id) %>
           </div>
         <% end%>
-      <% else %>
-        <div class="over-deadline">
-          エントリー終了
-        </div>
-      <% end %>
+      # <% else %>
+      #   <div class="over-deadline">
+      #     エントリー終了
+      #   </div>
+      # <% end %>
     </div>
   </div>
   <table class="event-table">

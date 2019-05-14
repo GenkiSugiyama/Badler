@@ -20,11 +20,11 @@ class ClubsController < ApplicationController
   end
 
   def index
-    # @clubs = Club.page(params[:page]).per(8).order("created_at DESC")
-    # if prams[:practice_area].present?
-    #   @clubs = @clubs.get_by_practice_area(params[practice_area])
-    # end
-    @clubs = Club.search(params[:practice_area])
+    @clubs = Club.page(params[:page]).per(8).order("created_at DESC")
+    if params[:practice_area].present?
+      @clubs = @clubs.get_by_practice_area(params[:practice_area])
+    end
+    # @clubs = Club.search(params[:practice_area])
   end
 
   def show

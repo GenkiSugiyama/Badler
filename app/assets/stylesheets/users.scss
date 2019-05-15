@@ -58,11 +58,32 @@
   pointer-events: none;
   transition: 0.5s;
 }
+.login_form .field em {
+  position: absolute;
+  top: 0;
+  left: 90px;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 1px;
+  pointer-events: none;
+  transition: 0.5s;
+}
 
 .login_form .field input:focus ~ label,
+.login_form .field input:valid ~ label
  {
   top: -18px;
   left: 0;
+  color: orange;
+  font-size: 12px;
+}
+
+.login_form .field input:focus ~ em,
+.login_form .field input:valid ~ em
+ {
+  top: -18px;
+  left: 80px;
   color: orange;
   font-size: 12px;
 }

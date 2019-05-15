@@ -20,12 +20,6 @@ class EntryUsersController < ApplicationController
     @categories = EventCategory.where(event_id: params[:event_id])
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   private
   def entry
     params.require(:entry_user).permit(:event_category_id)

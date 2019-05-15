@@ -76,7 +76,6 @@ class UsersController < ApplicationController
     @entry_user = EntryUser.find(params[:id])
     @category_results = EntryUser.find(params[:id]).event_category.category_results
     @user = current_user
-    # @user = User.find(params[:user_id])
   end
 
   def entry_update

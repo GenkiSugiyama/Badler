@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user1, only: [:edit, :update]
   before_action :correct_user2, only: [:entry, :entry_update, :entry_destroy]
+  before_action :input_result, only: [:entry, :entry_update, :entry_destroy]
   def index
     @users = User.all
   end
@@ -119,6 +120,14 @@ class UsersController < ApplicationController
   def correct_user2
     user = User.find(params[:user_id])
     if current_user != user
+      redirect_to user_path(current_user)
+    end
+  end
+
+  def input_result
+    event = EntryUser.find(params[:id]).event_category.event
+    unless Date.today > event.date
+      flash[:alert] = "大会が未開催です"
       redirect_to user_path(current_user)
     end
   end

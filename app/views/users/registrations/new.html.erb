@@ -5,25 +5,25 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
-        <%= f.label :name %>
         <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+        <%= f.label :name %>
       </div>
 
       <div class="field">
-        <%= f.label :email %>
         <%= f.email_field :email, autocomplete: "email" %>
+        <%= f.label :email %>
       </div>
 
       <div class="field">
+        <%= f.password_field :password, autocomplete: "new-password" %>
         <%= f.label :password %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <em>(<%= @minimum_password_length %>文字以上の半角英数字 )</em>
         <% end %>
-        <%= f.password_field :password, autocomplete: "new-password" %>
       </div>
       <div class="field">
-        <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <%= f.label :password_confirmation %>
       </div>
 
       <div class="actions">

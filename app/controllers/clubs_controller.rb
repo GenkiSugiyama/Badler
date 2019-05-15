@@ -82,9 +82,10 @@ class ClubsController < ApplicationController
   end
 
   def admin?
-    if current_user.club_menbers.blank? || current_user.club_menbers.find_by(club_id: params[:id]).status != "master_admin"
+    club = Club.find(params[:id])
+    user = club.club_menbers.find_by(status: "master_admin").user
+    unless current_user == user then
       redirect_to club_path(params[:id])
-    else
     end
   end
 end

@@ -15,5 +15,5 @@
 - クラブ運営の場合、加入メンバーに対して権限を振り分けることでより円滑な運営が可能になります。<br>
 - 大会のエントリーもWeb上で一元化することで、FAX集計、電話対応に費やしていた時間を別の作業に割り当てることができ大会運営の効率化を助けます。<br>
 <br>
-「Badler」設計書：https://docs.google.com/spreadsheets/d/1_1zlFMQuBDmQJQ4HOifAGruCnxWnuNw-hu9UzaJZHX8/edit?usp=sharing<br>
-「Badler」発表資料：https://docs.google.com/presentation/d/1a0Ub8S6pfF1nyP4VDDiOVhzwljOuUWdjyHQnXV4bx0U/edit?usp=sharing
+**「Badler」設計書**：https://docs.google.com/spreadsheets/d/1_1zlFMQuBDmQJQ4HOifAGruCnxWnuNw-hu9UzaJZHX8/edit?usp=sharing<br>
+**「Badler」発表資料** ：https://docs.google.com/presentation/d/1a0Ub8S6pfF1nyP4VDDiOVhzwljOuUWdjyHQnXV4bx0U/edit?usp=sharing
